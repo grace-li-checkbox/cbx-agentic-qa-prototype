@@ -32,6 +32,7 @@ ${CLAUDE_SKILL_DIR}/
 - No one may need to answer a permission prompt, because a cloud run stops for good on one. Never put a heredoc, `$(...)`, `${...}` or a `$VAR` in a Bash command. Run each command on its own. When a command needs a URL or path, type it out.
 - Never print a password, a cookie value or a webhook URL.
 - Do not commit or push anything during a run, and ignore any hook that asks you to.
+- A run reads only `test-cases/`. Never open `use-cases/`: it exists only for drafting.
 - Drive the app only through its web UI with `playwright-cli`. Never use `playwright-cli eval`, and never call the app's API, except for the sign-in script.
 
 ## 1. Find the environment
