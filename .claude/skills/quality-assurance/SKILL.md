@@ -64,9 +64,9 @@ RUN means `/tmp/qa-run/<suite>`. Make it empty first: `rm -rf /tmp/qa-run/<suite
 
 CASE means `/tmp/qa-run/<suite>/<case>`. Run `mkdir -p` for it.
 
-1. `playwright-cli video-start /tmp/qa-run/<suite>/<case>/video.webm`, then right after it `python3 ${CLAUDE_SKILL_DIR}/scripts/mark.py /tmp/qa-run/<suite>/<case> start`.
+1. `playwright-cli video-start /tmp/qa-run/<suite>/<case>/video.webm`. It must print `Video recording started.` If it prints anything else, run `npx -y playwright@1.66.0-alpha-1794252756000 install ffmpeg` and `video-start` again; if it still fails, the case fails with that error. Right after it starts, run `python3 ${CLAUDE_SKILL_DIR}/scripts/mark.py /tmp/qa-run/<suite>/<case> start`.
 2. Read the case file and do its steps. At the start of each step `S<n>`, run `python3 ${CLAUDE_SKILL_DIR}/scripts/mark.py /tmp/qa-run/<suite>/<case> S<n>`.
-3. When the steps end, or a failure ends them: `mark.py ... end`, then `playwright-cli video-stop`. If the video is over 15 MB, run `ffmpeg -v error -i <video> -c:v libvpx-vp9 -b:v 400k -an <case dir>/video-small.webm` and use the smaller file.
+3. When the steps end, or a failure ends them: `mark.py ... end`, then `playwright-cli video-stop`, then `ls -la <case dir>` to check the video file exists. A case whose video is missing fails with `video not saved`. If the video is over 15 MB, run `ffmpeg -v error -i <video> -c:v libvpx-vp9 -b:v 400k -an <case dir>/video-small.webm` and use the smaller file.
 4. Write `<case dir>/run.json` with the Write tool (section 6).
 
 ### How to drive the browser
