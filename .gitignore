@@ -1,0 +1,3 @@
+qa-artifact/
+.playwright-cli/
+__pycache__/
