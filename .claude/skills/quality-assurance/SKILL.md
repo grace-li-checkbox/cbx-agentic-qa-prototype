@@ -73,6 +73,7 @@ CASE means `/tmp/qa-run/<suite>/<case>`. Run `mkdir -p` for it.
 
 - Look before you act. Run `playwright-cli snapshot --filename=/tmp/qa-run/snap.txt`, then search that file with Grep (or Read part of it) to find the element you need by what it is for, and act on it by its `ref`. Take a new snapshot after anything that changes the page. Never guess a ref you have not seen in a snapshot.
 - Find things the way a new user would: by headings, labels, tabs, buttons and menus. Open named things (an AI Agent, a board) by finding their name in the UI, not by a stored ID or URL.
+- Keep a case in one tab, because the video records one file per tab. When a click opens a new tab, run `playwright-cli tab-list` to read its URL, `playwright-cli tab-close <index>` to close it, then `playwright-cli goto <that URL>` in the first tab.
 - Commands: `goto <url>`, `click <ref>`, `fill <ref> "<text>"` (add `--submit` to press Enter), `select <ref> <value>`, `press <key>`, `screenshot --filename=<file>`.
 - To wait for something slow, such as an AI reply: `python3 ${CLAUDE_SKILL_DIR}/scripts/wait.py 10`, then take a snapshot. Repeat until the page stops changing, for at most 5 minutes.
 - A step may use at most 25 `playwright-cli` commands. If it runs out, the step fails.
