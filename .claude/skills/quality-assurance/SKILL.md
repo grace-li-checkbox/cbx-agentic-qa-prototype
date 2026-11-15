@@ -20,6 +20,7 @@ ${CLAUDE_SKILL_DIR}/
 ├── SKILL.md                    this runner
 ├── playwright.config.json      browser settings for playwright-cli
 ├── scripts/                    login.py, mark.py, wait.py, teams.py
+├── report/index.html           the results page a run publishes
 ├── drafting/DRAFTING.md        how to draft test cases from a ticket
 ├── use-cases/<slice>/<area>.md what the product can do
 └── test-cases/<suite>/
@@ -121,8 +122,8 @@ Print a table with one row per case: suite, case, result, and for a failure its 
 
 When the request gives a results artifact URL (ARTIFACT):
 
-1. Make the folder OUT = `<current directory>/qa-artifact`. Copy the first case's `run.json`, video (as `video.webm`) and screenshots into OUT, and `/tmp/qa-run/summary.json` too. The results page shows one case; the summary lists all.
-2. Load the Artifact tool (with ToolSearch if it is deferred). Make these calls in this order: `read` with `url` ARTIFACT and no `path`; `read` with `url` ARTIFACT and `path` `index.html` (the result names the saved file); `list` with `scope` `files` and `url` ARTIFACT.
-3. `publish` with `url` ARTIFACT, `file_path` that saved page file unchanged, `root` OUT, and `files` mapping each file in OUT to itself. Leave out `icon`. If it is refused, do what the refusal says once, then publish once more.
+1. Make the folder OUT = `<current directory>/qa-artifact`. Copy `/tmp/qa-run/summary.json` into OUT. For each case that has a `run.json`, copy into `OUT/<suite>/<case>/` its `run.json`, its video (as `video.webm`) and its screenshots. Copy nothing else: `state.json` holds cookies.
+2. Load the Artifact tool (with ToolSearch if it is deferred). Make these calls in this order: `read` with `url` ARTIFACT and no `path`; `list` with `scope` `files` and `url` ARTIFACT.
+3. `publish` with `url` ARTIFACT, `file_path` `${CLAUDE_SKILL_DIR}/report/index.html`, `root` OUT, and `files` mapping each file in OUT to its path inside OUT, plus each listed file that is not in OUT (other than `index.html`) to `null`. Leave out `icon`. If the files in OUT add up to more than 60 MB, publish in more than one call, each under 60 MB. If it is refused, do what the refusal says once, then publish once more.
 
 When the request asks to post to Teams and `ROUTINE_QA_TEAMS_WEBHOOK` is set, run `python3 ${CLAUDE_SKILL_DIR}/scripts/teams.py /tmp/qa-run/summary.json --title "<title from the request>"`, adding `--artifact <ARTIFACT>` when the publish succeeded, `--publish-error "<reason>"` when it failed, and one `--mention "<Name>=<email>"` for each person the request names. It prints the HTTP status; 202 means accepted.
