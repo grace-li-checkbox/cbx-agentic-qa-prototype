@@ -13,7 +13,7 @@ When the agent asks a question instead of acting, send the follow-up, up to 4 re
 
 In the AI Agent section, open the AI Agent named `Ask Kes Anything` and start a chat with it. Send the S1 message.
 
-Pass: before it starts anything, the agent asks whose template to use and which region. After the follow-up, a reply says it started `[KITBAG] Self Service NDA` in `Legal Team` for `Contoso Supplies Pty Ltd`, and shows a link to the workflow.
+Pass: before it starts anything, the agent asks whose template to use and which region. After the follow-up, a reply says it started an NDA for `Contoso Supplies Pty Ltd` and shows a link to the workflow. The reply does not have to name the workflow: S2 checks the link goes to the right one.
 
 ## S2 Open the started workflow
 
