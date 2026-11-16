@@ -1,0 +1,1154 @@
+{
+  "_meta": {
+    "source": "playbook-qa/fixtures/verdantis-nda-playbook.md (the dev copy). Every sentence in standardPosition, fallbacks, walkAwayPosition and acceptable[].sentences is verbatim from it after removing **, <u>, leading \"> \"/\"• \" and decoding &amp;.",
+    "positionCount": 23,
+    "selfServe": "All fallbacks selfServe false: Section 1A \"There is no self-serve band and no set of self-serve fallbacks.\"",
+    "walkAwayWithApproval": "Where a Walk-Away block only says a deviation is High/Medium/Low Risk needing named approval, the product prompt (\"A concession the playbook accepts only with someone's approval is a fallback too\") also allows it as a last approval fallback. Each such case is listed in that entry's `acceptable`; where the Fallback block says \"Not applicable\"/\"None\"/\"Same as the Preferred Position\", zero fallbacks is strict."
+  },
+  "judgeRules": {
+    "scope": "Compare the extracted positions with this key. Text comparison ignores whitespace and markdown (**, *, <u>, leading \"> \" or \"• \", &amp; vs &). Label-only segments (a few heading words ending in \".\", e.g. \"Duration.\", \"Public Domain.\", or a list number like \"1.\") may be added or omitted anywhere. Any other variation passes only if the entry's `acceptable` lists it.",
+    "matching": "An extracted position covers a key position when it is about the same contract term, whatever its termName. If the key entry's `acceptable` allows a split or merge, judge the union of the covering positions: standard sentences joined, fallbacks in playbook order.",
+    "J1_missingPosition": "FAIL if any key position has no extracted position covering its term.",
+    "J2_inaccurateStandard": "FAIL if an extracted standardPosition (a) changes the meaning of the key standardPosition, (b) leaves out a key standard sentence that `acceptable` does not mark as omittable, or (c) adds a sentence that is not in the key standardPosition and not listed in `acceptable` as an allowed addition or move into the standard.",
+    "J3_fallbackTextNotExact": "FAIL if an extracted fallback's text is not exactly the key fallback's sentences, allowing only the J-scope text normalisation and the `acceptable` variations (added, omitted, moved, split or merged sentences). FAIL if fallbacks are in a different order than the key, unless `acceptable` allows that order.",
+    "J4_fallbackCount": "FAIL if the number of extracted fallbacks differs from the key's count, or falls outside the count `acceptable` allows (a \"fallback count\" line, or a variation that adds, splits or merges a rung). A missing key fallback or a fallback the key does not have is a FAIL. Where the key says \"exactly zero\", any fallback fails.",
+    "reportOnly": "Never findings: isRequired differences; walk-away wording differences; extra positions that split or merge terms where `acceptable` allows; extra positions built only from sentences this file treats as non-positions (e.g. Section 7.2). Every fallback is expected to have selfServe false (Section 1A: \"There is no self-serve band and no set of self-serve fallbacks.\"); a wrong selfServe flag and an entirely missing walk-away are findings, graded by the routine prompt.",
+    "verdict": "Categories (Missing, Inaccurate, Hallucination) and severities (P0 fail, P1 warn) are defined in the Playbook QA routine prompt. This file defines what is expected and which variations are acceptable."
+  },
+  "positions": [
+    {
+      "id": "P1",
+      "playbookSection": "§3.1",
+      "termName": "Standard Exclusions from Confidential Information",
+      "isRequired": true,
+      "isRequiredBasis": "The NDA must contain all five of the following standard exclusions from the definition of \"Confidential Information.\"",
+      "standardPosition": [
+        "The NDA must contain all five of the following standard exclusions from the definition of \"Confidential Information.\"",
+        "Information that is or becomes generally available to the public other than as a result of a breach of the NDA by the Receiving Party or its Representatives.",
+        "The exclusion should be drafted to require that the information became publicly available through means other than a breach by the Receiving Party or any person to whom the Receiving Party disclosed the information.",
+        "Information that was already in the Receiving Party's possession prior to disclosure by the Disclosing Party, as demonstrated by contemporaneous written records, and was not obtained directly or indirectly in violation of any confidentiality obligation owed to the Disclosing Party.",
+        "Information independently developed by the Receiving Party or its Representatives without reference to or use of the Disclosing Party's Confidential Information, as demonstrated by contemporaneous written records.",
+        "Information received by the Receiving Party from a third party that is not, to the Receiving Party's knowledge, subject to a confidentiality obligation to the Disclosing Party with respect to such information.",
+        "Information that is required to be disclosed by applicable law, regulation, legal process, or governmental order, subject to compliance with the notice and cooperation provisions set forth in Section 6 of this playbook.",
+        "The exclusion should be conditioned on the Receiving Party providing prompt notice to the Disclosing Party (to the extent legally permissible) and reasonably cooperating with any effort by the Disclosing Party to obtain a protective order or other appropriate remedy."
+      ],
+      "fallbacks": [],
+      "walkAwayPosition": [
+        "Verdantis will not execute an NDA that omits any of these exclusions without High Risk approval in accordance with Section 2.",
+        "The omission of any of the five standard exclusions listed above constitutes a walk-away position."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: true (strict reading of \"must contain\"); false is a report-only difference."
+        },
+        {
+          "variation": "fallbacks: exactly zero. The playbook says \"There is no fallback position that would permit the omission of any exclusion.\" Any fallback here fails J4."
+        },
+        {
+          "variation": "sentence may be in standardPosition instead of walkAwayPosition",
+          "sentences": [
+            "Verdantis will not execute an NDA that omits any of these exclusions without High Risk approval in accordance with Section 2."
+          ]
+        },
+        {
+          "variation": "walkAwayPosition may also include",
+          "sentences": [
+            "The absence of any exclusion — and particularly the absence of the independent-development exclusion — is classified as a High Risk deviation requiring approval from both the General Counsel (Ramaswamy) and the VP, Corporate Development (Prescott) before Verdantis may agree to execute the NDA."
+          ]
+        },
+        {
+          "variation": "standardPosition may omit these drafting refinements",
+          "sentences": [
+            "The exclusion should be drafted to require that the information became publicly available through means other than a breach by the Receiving Party or any person to whom the Receiving Party disclosed the information.",
+            "The exclusion should be conditioned on the Receiving Party providing prompt notice to the Disclosing Party (to the extent legally permissible) and reasonably cooperating with any effort by the Disclosing Party to obtain a protective order or other appropriate remedy."
+          ]
+        },
+        {
+          "variation": "standardPosition may also include the lead-in and exclusion labels",
+          "sentences": [
+            "The five required exclusions are as follows:",
+            "Public Domain.",
+            "Prior Possession.",
+            "Independent Development.",
+            "Third-Party Lawful Receipt.",
+            "Compelled Disclosure."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P2",
+      "playbookSection": "§3.2",
+      "termName": "Definition of \"Representatives\" / \"Permitted Disclosees\"",
+      "isRequired": false,
+      "isRequiredBasis": "The term \"Representatives\" (or \"Permitted Disclosees,\" depending on the counterparty's preferred nomenclature) must be defined broadly to include the Receiving Party's directors, officers, and employees, together with the following categories of external advisors and parties, in each case who have a need to know the Confidential Information in connection with evaluating or consummating the Transaction:",
+      "standardPosition": [
+        "The term \"Representatives\" (or \"Permitted Disclosees,\" depending on the counterparty's preferred nomenclature) must be defined broadly to include the Receiving Party's directors, officers, and employees, together with the following categories of external advisors and parties, in each case who have a need to know the Confidential Information in connection with evaluating or consummating the Transaction:",
+        "Legal counsel (including outside counsel retained by the Receiving Party for the Transaction or for related legal matters);",
+        "Financial advisors (including investment bankers, valuation consultants, and other financial advisors engaged by the Receiving Party);",
+        "Accounting advisors and auditors (including the Receiving Party's independent auditors and any accounting advisors specifically engaged for the Transaction);",
+        "Potential lenders and their respective advisors (including banks, financial institutions, and other credit providers that the Receiving Party may approach in connection with financing the Transaction, together with the legal, financial, and accounting advisors of such potential lenders);",
+        "Potential co-investors and their respective advisors (including equity co-investors, co-bidders, consortium members, and similar parties, together with their legal, financial, and accounting advisors).",
+        "The definition must be sufficiently broad to encompass Verdantis's existing advisor relationships and to ensure that Verdantis can share Confidential Information with the full range of professional advisors necessary to evaluate and, if applicable, consummate a Transaction."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "If the counterparty insists on limiting the definition to an enumerated list of named categories rather than a general, open-ended formulation (e.g., \"advisors and representatives who have a need to know\"), Verdantis will accept a closed list provided that every category identified under the Preferred Position above is expressly included in the list.",
+            "In this scenario, Verdantis may also agree to a requirement that external advisors (i.e., advisors who are not directors, officers, or employees of the Receiving Party) be bound by written confidentiality obligations no less restrictive than those set forth in the NDA, or that such advisors be bound by professional ethical obligations of confidentiality (as is the case for legal counsel and, in many jurisdictions, accounting professionals)."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "Any definition of \"Representatives\" that would exclude either of these advisor categories — or their functional equivalents — is unacceptable.",
+        "A definition of \"Representatives\" or \"Permitted Disclosees\" that is limited to the Receiving Party's directors, officers, and employees only — and that excludes external legal counsel, financial advisors, potential lenders, and potential co-investors — constitutes a High Risk deviation and is unacceptable without approval from the General Counsel (Ramaswamy) and the VP, Corporate Development (Prescott)."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "fallback 1 may be split into two fallbacks in playbook order (closed list; then written/ethical confidentiality obligations)."
+        },
+        {
+          "variation": "fallback (the one containing the written-confidentiality sentence) may also include",
+          "sentences": [
+            "Verdantis should resist any requirement that external advisors execute a separate NDA or joinder agreement, as this imposes unnecessary administrative burden and may delay the Transaction timeline."
+          ]
+        },
+        {
+          "variation": "sentence may be in standardPosition instead of walkAwayPosition",
+          "sentences": [
+            "Any definition of \"Representatives\" that would exclude either of these advisor categories — or their functional equivalents — is unacceptable."
+          ]
+        },
+        {
+          "variation": "standardPosition may omit",
+          "sentences": [
+            "The definition must be sufficiently broad to encompass Verdantis's existing advisor relationships and to ensure that Verdantis can share Confidential Information with the full range of professional advisors necessary to evaluate and, if applicable, consummate a Transaction."
+          ]
+        },
+        {
+          "variation": "walk-away block may instead be the last fallback (an approval rung, after all other fallbacks); walk-away may then be empty or keep only the remaining refusal sentences. Fallback count may be one higher.",
+          "sentences": [
+            "A definition of \"Representatives\" or \"Permitted Disclosees\" that is limited to the Receiving Party's directors, officers, and employees only — and that excludes external legal counsel, financial advisors, potential lenders, and potential co-investors — constitutes a High Risk deviation and is unacceptable without approval from the General Counsel (Ramaswamy) and the VP, Corporate Development (Prescott)."
+          ]
+        },
+        {
+          "variation": "fallback count: 1 to 3."
+        }
+      ]
+    },
+    {
+      "id": "P3",
+      "playbookSection": "§3.3",
+      "termName": "Scope and Form of Confidential Information",
+      "isRequired": false,
+      "isRequiredBasis": "The definition of \"Confidential Information\" should encompass information disclosed in any form, including written, oral, electronic, and visual.",
+      "standardPosition": [
+        "The definition of \"Confidential Information\" should encompass information disclosed in any form, including written, oral, electronic, and visual.",
+        "The definition should be broad enough to capture technical data and specifications, financial information and projections, operational data and metrics, commercial terms and customer information, strategic plans and analyses, intellectual property and trade secrets, and personnel information, in each case to the extent disclosed by the Disclosing Party or its Representatives in connection with the Transaction.",
+        "The definition should also cover the fact that discussions or negotiations regarding the Transaction are occurring, the terms and conditions of those discussions, and the existence or content of any proposals or offers exchanged between the parties, in each case subject to the securities-law carve-out described in Section 6.1 of this playbook."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "Verdantis may accept a reasonable narrowing of the scope of the definition to information that is marked or designated as \"Confidential\" (or words of similar import) at the time of disclosure, or within a specified time period following disclosure, provided that orally disclosed information is covered if the Disclosing Party provides written confirmation of the confidential nature of such information within 10 business days following the date of oral disclosure."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "A limitation of the definition of \"Confidential Information\" to written materials only — excluding oral, electronic, and visual disclosures — is unacceptable."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "fallback 1 may also include",
+          "sentences": [
+            "This marking/designation requirement is a common feature of NDAs in commercial contexts and is acceptable provided that the 10-business-day confirmation period for oral disclosures is included, as the rapid pace of M&A diligence makes it impractical to mark every oral communication in real time."
+          ]
+        },
+        {
+          "variation": "standardPosition may omit (cross-reference to Section 6.1 term)",
+          "sentences": [
+            "The definition should also cover the fact that discussions or negotiations regarding the Transaction are occurring, the terms and conditions of those discussions, and the existence or content of any proposals or offers exchanged between the parties, in each case subject to the securities-law carve-out described in Section 6.1 of this playbook."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4",
+      "playbookSection": "§3.4",
+      "termName": "Mutual vs. Unilateral Scope",
+      "isRequired": false,
+      "isRequiredBasis": "Verdantis's strong preference is for a mutual NDA under which both parties simultaneously function as Disclosing Party and Receiving Party.",
+      "standardPosition": [
+        "Verdantis's strong preference is for a mutual NDA under which both parties simultaneously function as Disclosing Party and Receiving Party."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "A unilateral NDA is acceptable where Verdantis is the Receiving Party only (i.e., where Verdantis is the potential acquiror and the counterparty is the potential target, and only the target is disclosing confidential information).",
+            "In this scenario, the scope of Verdantis's obligations as Receiving Party must be otherwise consistent with the positions set forth in this playbook."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "A unilateral NDA under which Verdantis is the Disclosing Party only, with no reciprocal confidentiality protection for information that the counterparty may disclose to Verdantis, is unacceptable."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "fallback 1 may also include",
+          "sentences": [
+            "Outside counsel should ensure that the unilateral structure does not impose disproportionate obligations on Verdantis as compared to a mutual NDA."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P5",
+      "playbookSection": "§3.5",
+      "termName": "Warranty Disclaimer and Accuracy of Information",
+      "isRequired": false,
+      "isRequiredBasis": "Verdantis accepts and, in many cases, will affirmatively propose the inclusion of a provision disclaiming warranties as to the accuracy, completeness, or fitness for a particular purpose of the Confidential Information.",
+      "standardPosition": [
+        "Verdantis accepts and, in many cases, will affirmatively propose the inclusion of a provision disclaiming warranties as to the accuracy, completeness, or fitness for a particular purpose of the Confidential Information.",
+        "However, any such disclaimer must include a savings clause expressly preserving claims for fraud or intentional misrepresentation."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "If the counterparty resists the inclusion of an express fraud/intentional-misrepresentation savings clause — for example, on the ground that such a clause is unnecessary because fraud claims are not waivable as a matter of law — outside counsel should counter with alternative language providing that the warranty disclaimer does not apply to any representation or disclosure made by a party \"with actual knowledge of its falsity.\""
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "Outside counsel should not agree to any formulation — regardless of its placement in the NDA — that effectively immunizes a party against liability for fraud or intentional misrepresentation."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "standardPosition may also include the suggested language",
+          "sentences": [
+            "Suggested language for the savings clause:",
+            "*\"Notwithstanding the foregoing, nothing in this Section shall limit or otherwise affect the liability of either party for fraud or intentional misrepresentation in connection with the disclosure of Confidential Information.\""
+          ]
+        },
+        {
+          "variation": "walkAwayPosition may also include the two rating sentences; they must not form a fallback (they only rate, and the playbook says outside counsel \"should not agree to any formulation\" that immunizes fraud)",
+          "sentences": [
+            "A blanket warranty disclaimer with no savings clause that purports to eliminate claims for fraud or intentional misrepresentation is classified as a Low Risk deviation if limited to the warranty-disclaimer section of the NDA.",
+            "However, the deviation becomes a Medium Risk deviation if the disclaimer purports to apply to the NDA as a whole or to limit or cap the remedies available for breach of the NDA's confidentiality obligations."
+          ]
+        },
+        {
+          "variation": "fallback count: exactly 1."
+        }
+      ]
+    },
+    {
+      "id": "P6",
+      "playbookSection": "§4.1",
+      "termName": "Survival of Confidentiality Obligations",
+      "isRequired": false,
+      "isRequiredBasis": "Confidentiality obligations under the NDA shall survive for a period of 2 years from the date of execution of the NDA, regardless of whether a Transaction is consummated and regardless of whether the NDA is terminated earlier by either party.",
+      "standardPosition": [
+        "Confidentiality obligations under the NDA shall survive for a period of 2 years from the date of execution of the NDA, regardless of whether a Transaction is consummated and regardless of whether the NDA is terminated earlier by either party."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "Verdantis may accept a survival period of up to 3 years from the date of execution of the NDA.",
+            "A survival period between 2 and 3 years is classified as a Medium Risk deviation and requires approval from the General Counsel (Ramaswamy)."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "Any survival period exceeding 3 years is unacceptable and must be rejected."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "fallback 1 must keep the GC-approval sentence (product rule: keep the approval in the fallback); omitting it fails J3."
+        },
+        {
+          "variation": "the escalation sentence may be in walkAwayPosition, omitted, or form a last approval fallback",
+          "sentences": [
+            "If the counterparty insists on a survival period in excess of 3 years and is unwilling to negotiate, outside counsel must escalate the issue as follows: a counterparty demand for a survival period between 3 and 5 years that is the subject of active negotiation remains a Medium Risk deviation; however, a counterparty's firm insistence on a survival period exceeding 3 years with no willingness to negotiate becomes a High Riskdeviation requiring approval from the General Counsel (Ramaswamy) and the VP, Corporate Development (Prescott)."
+          ]
+        },
+        {
+          "variation": "fallback count: 1 or 2."
+        }
+      ]
+    },
+    {
+      "id": "P7",
+      "playbookSection": "§4.2",
+      "termName": "Term and Termination of the NDA",
+      "isRequired": false,
+      "isRequiredBasis": "The NDA shall have a defined term of 12 months from the date of execution, during which period the parties may exchange Confidential Information in connection with evaluating and, if applicable, consummating the Transaction.",
+      "standardPosition": [
+        "The NDA shall have a defined term of 12 months from the date of execution, during which period the parties may exchange Confidential Information in connection with evaluating and, if applicable, consummating the Transaction.",
+        "The NDA may also include a provision permitting either party to terminate the NDA at any time upon written notice to the other party.",
+        "In either case — whether the NDA expires at the end of its stated term or is terminated earlier — the confidentiality obligations set forth in the NDA shall survive termination or expiration in accordance with the survival period specified in Section 4.1."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "Verdantis may accept a term of up to 18 months from the date of execution, particularly in complex transactions where the evaluation period is expected to be lengthy.",
+            "A term of between 12 and 18 months is a Low Risk deviation and may be approved by the Associate General Counsel (Castellano)."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "An open-ended or \"evergreen\" term — i.e., a term that continues indefinitely with no expiration date and no termination mechanism — is unacceptable."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "fallback 1 must keep the AGC-approval sentence; omitting it fails J3."
+        },
+        {
+          "variation": "standardPosition may omit (cross-reference to Section 4.1)",
+          "sentences": [
+            "In either case — whether the NDA expires at the end of its stated term or is terminated earlier — the confidentiality obligations set forth in the NDA shall survive termination or expiration in accordance with the survival period specified in Section 4.1."
+          ]
+        },
+        {
+          "variation": "position may be split into \"Term\" and \"Termination\" positions; judge the union."
+        }
+      ]
+    },
+    {
+      "id": "P8",
+      "playbookSection": "§4.3",
+      "termName": "Residuals Clause",
+      "isRequired": true,
+      "isRequiredBasis": "The residuals clause is a mandatory provision and must appear in every M&A NDA to which Verdantis is a party.",
+      "standardPosition": [
+        "The NDA must include a residuals clause permitting each party's personnel to use general knowledge, ideas, concepts, know-how, and techniques that are retained in the unaided memory of the Receiving Party's Representatives following their exposure to the Disclosing Party's Confidential Information, provided that such use does not constitute disclosure of specific Confidential Information or the reproduction of any tangible embodiment of Confidential Information.",
+        "The residuals clause is a mandatory provision and must appear in every M&A NDA to which Verdantis is a party."
+      ],
+      "fallbacks": [],
+      "walkAwayPosition": [
+        "The omission of a residuals clause from the NDA is classified as a Medium Risk deviation requiring approval from the General Counsel (Ramaswamy)."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: true (playbook: \"Preferred Position (Mandatory)\" and \"must appear in every M&A NDA\"); false is a report-only difference."
+        },
+        {
+          "variation": "fallbacks: exactly zero. The playbook says \"Fallback Position. Not applicable. A residuals clause is mandatory\". Placing the Medium Risk walk-away sentence as a fallback fails J4."
+        },
+        {
+          "variation": "standardPosition may also include",
+          "sentences": [
+            "A residuals clause is mandatory and must be included in every M&A NDA.",
+            "Suggested language for the residuals clause:",
+            "*\"Nothing in this Agreement shall restrict the right of either party to use Residual Information for any purpose.",
+            "'Residual Information' means ideas, concepts, know-how, or techniques relating to the Disclosing Party's technology or business that are retained in the unaided memory of Representatives of the Receiving Party who had access to Confidential Information, without reference to any written or other tangible form of such Confidential Information.",
+            "The Receiving Party shall have no obligation to limit or restrict the scope of work or reassignment of its Representatives who have had access to Confidential Information, provided that the Receiving Party shall not intentionally cause or direct any such Representative to memorize Confidential Information for the purpose of circumventing the restrictions set forth in this Agreement.\""
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P9",
+      "playbookSection": "§5.1",
+      "termName": "Triggering Events",
+      "isRequired": false,
+      "isRequiredBasis": "The obligation to return or destroy Confidential Information shall arise upon the earliest of: (a) receipt by the Receiving Party of a written request from the Disclosing Party at any time (whether during or after the term of the NDA); or (b) termination or expiration of discussions regarding the Transaction, whether such termination occurs by mutual agreement, by unilateral decision of either party, or by operation of the NDA's term.",
+      "standardPosition": [
+        "The obligation to return or destroy Confidential Information shall arise upon the earliest of: (a) receipt by the Receiving Party of a written request from the Disclosing Party at any time (whether during or after the term of the NDA); or (b) termination or expiration of discussions regarding the Transaction, whether such termination occurs by mutual agreement, by unilateral decision of either party, or by operation of the NDA's term."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "Verdantis may accept a provision under which the obligation to return or destroy Confidential Information is triggered only upon written request by the Disclosing Party, without an automatic trigger upon termination of discussions."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "An NDA that contains no return or destruction obligation whatsoever — i.e., that permits the Receiving Party to retain all Confidential Information indefinitely without any obligation to return or destroy it upon request or upon termination of discussions — is unacceptable."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "fallback 1 may also include the rating sentence",
+          "sentences": [
+            "This is a Low Risk deviation."
+          ]
+        },
+        {
+          "variation": "positions P9, P10, P11 may be merged into one \"Return and Destruction\" position; judge the union, with fallbacks in playbook order (P9, P10, P11)."
+        }
+      ]
+    },
+    {
+      "id": "P10",
+      "playbookSection": "§5.2",
+      "termName": "Timeline and Carve-Outs",
+      "isRequired": true,
+      "isRequiredBasis": "The return/destruction obligation must be subject to the following two carve-outs, both of which are required in every M&A NDA to which Verdantis is a party:",
+      "standardPosition": [
+        "Upon the occurrence of a triggering event described in Section 5.1, the Receiving Party shall return to the Disclosing Party or destroy (at the Receiving Party's election) all Confidential Information, including all copies, notes, summaries, analyses, compilations, and other materials prepared by the Receiving Party or its Representatives that contain, reflect, or are derived from Confidential Information, within 15 business days of the triggering event.",
+        "Upon completion of such return or destruction, the Receiving Party shall provide a written certification of destruction signed by an authorized officer of the Receiving Party, in accordance with Section 5.3.",
+        "The return/destruction obligation must be subject to the following two carve-outs, both of which are required in every M&A NDA to which Verdantis is a party:",
+        "The Receiving Party may retain copies of Confidential Information to the extent required by applicable law, regulation, or bona fide internal document-retention policy, or to the extent subject to a litigation hold, regulatory investigation, or other preservation obligation imposed by a court, regulatory authority, or the Receiving Party's legal counsel.",
+        "Such retained copies (collectively, \"Retained Copies\") remain subject to the confidentiality obligations of the NDA for the full duration of the applicable survival period set forth in Section 4.1.",
+        "The Receiving Party shall not be required to purge, delete, or otherwise remove Confidential Information from electronic archival, backup, or disaster-recovery systems (including, without limitation, disaster-recovery tapes, automated email archive systems, network backup servers, and similar systems) where deletion is not commercially practicable using reasonable efforts.",
+        "Confidential Information retained on such systems shall not be intentionally accessed by the Receiving Party or its Representatives following the return/destruction date and shall remain subject to the NDA's confidentiality obligations for the full duration of the applicable survival period."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "Verdantis may accept a return/destruction timeline of no fewer than 10 business days following the triggering event, provided that both of the carve-outs described above (regulatory/legal holds and electronically archived copies) are retained in the NDA."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "A return/destruction deadline of fewer than 10 business days without the regulatory/legal-hold and electronic-archive carve-outs is classified as a Medium Risk deviation requiring approval from the General Counsel (Ramaswamy)."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: true or either; report-only."
+        },
+        {
+          "variation": "standardPosition may omit (covered by P11)",
+          "sentences": [
+            "Upon completion of such return or destruction, the Receiving Party shall provide a written certification of destruction signed by an authorized officer of the Receiving Party, in accordance with Section 5.3."
+          ]
+        },
+        {
+          "variation": "standardPosition may also include the lead-in labels",
+          "sentences": [
+            "Regulatory/Legal Holds.",
+            "Electronically Archived Copies."
+          ]
+        },
+        {
+          "variation": "fallback 1 may also include the rating sentence",
+          "sentences": [
+            "A timeline between 10 and 15 business days is a Low Risk deviation if both carve-outs are preserved."
+          ]
+        },
+        {
+          "variation": "this rating sentence may be in fallback 1, omitted, or form a second (approval) fallback",
+          "sentences": [
+            "A timeline of fewer than 15 business days without one or both of the carve-outs is a Medium Risk deviation."
+          ]
+        },
+        {
+          "variation": "walk-away block may instead be the last fallback (an approval rung, after all other fallbacks); walk-away may then be empty or keep only the remaining refusal sentences. Fallback count may be one higher.",
+          "sentences": [
+            "A return/destruction deadline of fewer than 10 business days without the regulatory/legal-hold and electronic-archive carve-outs is classified as a Medium Risk deviation requiring approval from the General Counsel (Ramaswamy)."
+          ]
+        },
+        {
+          "variation": "walkAwayPosition may also include",
+          "sentences": [
+            "Deadlines of 5 business days or fewer without carve-outs are operationally infeasible for a publicly traded company of Verdantis's size and organizational complexity (approximately 3,200 employees across 12 offices) and should be redlined to the 15-business-day preferred position."
+          ]
+        },
+        {
+          "variation": "fallback count: 1 to 3. May be split into \"Timeline\" and \"Carve-outs\" positions or merged with P9/P11; judge the union."
+        }
+      ]
+    },
+    {
+      "id": "P11",
+      "playbookSection": "§5.3",
+      "termName": "Destruction Certification",
+      "isRequired": false,
+      "isRequiredBasis": "Upon completion of the destruction of Confidential Information (other than Retained Copies permitted under the regulatory/legal-hold and electronic-archive carve-outs), the Receiving Party shall provide a written certification to the Disclosing Party confirming that all Confidential Information (other than Retained Copies) has been destroyed.",
+      "standardPosition": [
+        "Upon completion of the destruction of Confidential Information (other than Retained Copies permitted under the regulatory/legal-hold and electronic-archive carve-outs), the Receiving Party shall provide a written certification to the Disclosing Party confirming that all Confidential Information (other than Retained Copies) has been destroyed.",
+        "The certification shall be signed by an authorized officer of the Receiving Party and shall be delivered within the return/destruction timeline specified in Section 5.2."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "Verdantis may accept a provision under which the destruction certification is signed by in-house counsel of the Receiving Party rather than by an officer."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "An NDA that contains no certification requirement — i.e., that imposes a destruction obligation but does not require the Receiving Party to confirm compliance — is a Low Risk deviation."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "fallback 1 may also include",
+          "sentences": [
+            "This is a Low Risk deviation.",
+            "Outside counsel should ensure that the in-house counsel providing the certification is authorized to do so on behalf of the Receiving Party and that the certification obligation is not unduly qualified (e.g., \"to the best of counsel's knowledge\" qualifications are acceptable; qualifications that effectively render the certification non-binding are not)."
+          ]
+        },
+        {
+          "variation": "walkAwayPosition may be empty (the sentence only rates the deviation Low Risk), or the sentence may form a last fallback",
+          "sentences": [
+            "An NDA that contains no certification requirement — i.e., that imposes a destruction obligation but does not require the Receiving Party to confirm compliance — is a Low Risk deviation."
+          ]
+        },
+        {
+          "variation": "fallback count: 1 or 2."
+        }
+      ]
+    },
+    {
+      "id": "P12",
+      "playbookSection": "§6.1",
+      "termName": "Non-Disclosure of Discussions / Existence of Transaction",
+      "isRequired": true,
+      "isRequiredBasis": "The NDA shall include a provision restricting each party from disclosing to any third party the existence of the NDA, the fact that discussions or negotiations regarding the Transaction are occurring or have occurred, the terms or conditions of the Transaction under discussion, or the existence or content of any proposals, offers, or counteroffers exchanged between the parties (collectively, \"Transaction Information\").",
+      "standardPosition": [
+        "The NDA shall include a provision restricting each party from disclosing to any third party the existence of the NDA, the fact that discussions or negotiations regarding the Transaction are occurring or have occurred, the terms or conditions of the Transaction under discussion, or the existence or content of any proposals, offers, or counteroffers exchanged between the parties (collectively, \"Transaction Information\").",
+        "However, the non-disclosure-of-discussions provision must contain a mandatory carve-out permitting disclosures of Transaction Information required under:",
+        "Applicable securities laws, including without limitation the Securities Act of 1933, as amended, the Securities Exchange Act of 1934, as amended, and the rules and regulations promulgated thereunder by the United States Securities and Exchange Commission (the \"SEC\"), including Regulation FD;",
+        "Stock-exchange rules, including the rules and listing standards of the Nasdaq Stock Market LLC, given Verdantis's listing on Nasdaq under the ticker symbol VRDS;",
+        "Subpoena, court order, or other compulsory legal process, including civil or criminal subpoenas, regulatory demands, and orders or requests issued by any court, governmental authority, or self-regulatory organization.",
+        "In the event of any conflict between the NDA obligations and securities-law disclosure requirements, the securities-law obligations must control."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "If the counterparty resists the inclusion of the full carve-out as described above, the minimum acceptable formulation must include, at a minimum, carve-outs for applicable securities laws and stock-exchange rules."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "The omission of any securities-law carve-out in the non-disclosure-of-discussions provision is a High Risk deviation requiring approval from the General Counsel (Ramaswamy) and the VP, Corporate Development (Prescott)."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: true or either; report-only."
+        },
+        {
+          "variation": "standardPosition may omit",
+          "sentences": [
+            "In the event of any conflict between the NDA obligations and securities-law disclosure requirements, the securities-law obligations must control."
+          ]
+        },
+        {
+          "variation": "this sentence may be added to fallback 1 or walkAwayPosition",
+          "sentences": [
+            "A carve-out limited to court orders or compulsory legal process alone is insufficient because it does not address the affirmative disclosure obligations imposed on public companies by the securities laws and exchange rules, which may require disclosure even in the absence of a court order or subpoena."
+          ]
+        },
+        {
+          "variation": "walk-away block may instead be the last fallback (an approval rung, after all other fallbacks); walk-away may then be empty or keep only the remaining refusal sentences. Fallback count may be one higher.",
+          "sentences": [
+            "The omission of any securities-law carve-out in the non-disclosure-of-discussions provision is a High Risk deviation requiring approval from the General Counsel (Ramaswamy) and the VP, Corporate Development (Prescott)."
+          ]
+        },
+        {
+          "variation": "position may be split into \"Non-Disclosure of Discussions\" and \"Securities-Law Carve-Out\" positions; judge the union."
+        },
+        {
+          "variation": "fallback count: 1 or 2."
+        }
+      ]
+    },
+    {
+      "id": "P13",
+      "playbookSection": "§6.2",
+      "termName": "Use Limitation",
+      "isRequired": true,
+      "isRequiredBasis": "This use limitation is a fundamental component of the NDA and is not subject to negotiation.",
+      "standardPosition": [
+        "The NDA shall provide that Confidential Information received by the Receiving Party may be used solely for the purpose of evaluating and, if applicable, negotiating and consummating the Transaction.",
+        "No other use of the Confidential Information is permitted, including without limitation use for competitive purposes, product development unrelated to the Transaction, or any commercial exploitation of the Confidential Information."
+      ],
+      "fallbacks": [],
+      "walkAwayPosition": [
+        "An NDA that permits the Receiving Party to use Confidential Information for purposes other than the evaluation and consummation of the Transaction — including, without limitation, for the Receiving Party's general business purposes, competitive intelligence, or product development — is unacceptable."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "fallbacks: exactly zero. The playbook says \"Fallback Position. None.\""
+        },
+        {
+          "variation": "standardPosition may also include",
+          "sentences": [
+            "This use limitation is a fundamental component of the NDA and is not subject to negotiation."
+          ]
+        },
+        {
+          "variation": "walkAwayPosition may also include",
+          "sentences": [
+            "Outside counsel should not propose or accept any modifications to the use limitation that would expand the permitted uses of Confidential Information beyond evaluation and consummation of the Transaction."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P14",
+      "playbookSection": "§6.3",
+      "termName": "Non-Solicitation of Personnel",
+      "isRequired": false,
+      "isRequiredBasis": "Verdantis's preferred position is to include no non-solicitation provision in the M&A NDA.",
+      "standardPosition": [
+        "Verdantis's preferred position is to include no non-solicitation provision in the M&A NDA."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "If the counterparty requires the inclusion of a non-solicitation provision as a condition to proceeding with discussions, Verdantis will accept such a provision only if it conforms to the following parameters:",
+            "The non-solicitation restriction shall have a maximum duration of 12 months from the date of the NDA.",
+            "The non-solicitation restriction shall be limited to personnel of the Disclosing Party who are introduced to the Receiving Party in connection with the due diligence process for the Transaction.",
+            "The non-solicitation must not extend to personnel who are merely \"contacted\" during the due diligence process or whose names appear in documents, organizational charts, or other materials reviewed by the Receiving Party during diligence.",
+            "The non-solicitation provision must include the following standard carve-outs:",
+            "The non-solicitation shall not apply to solicitations resulting from general recruitment efforts, including job postings on the Receiving Party's website or third-party job boards, print or online advertisements of general circulation, and engagements of executive search firms, in each case that are not specifically directed at the Disclosing Party's personnel.",
+            "The non-solicitation shall not apply to personnel of the Disclosing Party who initiate contact with the Receiving Party or apply for employment with the Receiving Party without any solicitation by the Receiving Party.",
+            "Any non-solicitation provision must be subject to an actual-damages standard only.",
+            "Verdantis may accept a non-solicitation provision with a duration of up to 12 months and scope limited to personnel introduced in connection with the due diligence process."
+          ],
+          "selfServe": false
+        },
+        {
+          "rung": 2,
+          "text": [
+            "In addition, Verdantis may accept a provision that restricts the Receiving Party from *hiring* (as opposed to merely *soliciting*) introduced personnel for up to 12 months, provided that the general-solicitation and unsolicited-contact exceptions described above are included.",
+            "In all cases, the actual-damages standard must be preserved and liquidated damages must not be accepted."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "Verdantis will not agree to a non-solicitation period exceeding 12 months.",
+        "Verdantis will not agree to liquidated-damages provisions for non-solicitation breaches.",
+        "The following are classified as High Risk deviations, each requiring approval from the General Counsel (Ramaswamy) and the VP, Corporate Development (Prescott):",
+        "A non-solicitation (or no-hire) period exceeding 12 months in duration;",
+        "A non-solicitation scope that extends to any employee \"contacted\" during the due diligence process (as opposed to those \"introduced\" in connection with the process);",
+        "Any provision imposing liquidated damages for non-solicitation breaches, regardless of the amount of the stipulated damages."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: false or either; report-only."
+        },
+        {
+          "variation": "standardPosition must contain the \"no non-solicitation provision\" sentence. The parameter sentences of fallback 1 (lead-in through \"actual-damages standard only\") may instead be in standardPosition, because they sit under the \"Preferred Position\" label; fallback 1 is then only the sentence below",
+          "sentences": [
+            "Verdantis may accept a non-solicitation provision with a duration of up to 12 months and scope limited to personnel introduced in connection with the due diligence process."
+          ]
+        },
+        {
+          "variation": "fallbacks 1 and 2 may be merged into one fallback (the playbook gives one \"Fallback Position\" paragraph); order of sentences must follow the playbook."
+        },
+        {
+          "variation": "\"In all cases\" sentence may sit in either fallback or in walkAwayPosition",
+          "sentences": [
+            "In all cases, the actual-damages standard must be preserved and liquidated damages must not be accepted."
+          ]
+        },
+        {
+          "variation": "fallback 2 may also include",
+          "sentences": [
+            "A \"no-hire\" provision is broader than a \"no-solicit\" provision because it restricts the Receiving Party from employing the relevant personnel regardless of who initiated the contact; however, a 12-month no-hire provision with appropriate exceptions is within the range of acceptable terms."
+          ]
+        },
+        {
+          "variation": "these refusal sentences may be in fallback 1 (or standardPosition with the parameters) instead of walkAwayPosition",
+          "sentences": [
+            "Verdantis will not agree to a non-solicitation period exceeding 12 months.",
+            "Verdantis will not agree to liquidated-damages provisions for non-solicitation breaches."
+          ]
+        },
+        {
+          "variation": "walk-away block may instead be the last fallback (an approval rung, after all other fallbacks); walk-away may then be empty or keep only the remaining refusal sentences. Fallback count may be one higher.",
+          "sentences": [
+            "The following are classified as High Risk deviations, each requiring approval from the General Counsel (Ramaswamy) and the VP, Corporate Development (Prescott):"
+          ]
+        },
+        {
+          "variation": "parameter labels and the carve-out lead-in may be added or omitted",
+          "sentences": [
+            "Duration.",
+            "Scope.",
+            "Exceptions.",
+            "General solicitations.",
+            "Unsolicited contacts.",
+            "Remedy.",
+            "The non-solicitation provision must include the following standard carve-outs:"
+          ]
+        },
+        {
+          "variation": "position may be split into Duration / Scope / Remedy (as Appendix A does); judge the union."
+        },
+        {
+          "variation": "fallback count: 1 to 3."
+        }
+      ],
+      "notes": "Standard is \"no non-solicitation provision\". The Preferred Position block then says Verdantis \"will accept such a provision only if it conforms to the following parameters\", which is a concession, so the parameters open fallback 1; the no-hire option is fallback 2."
+    },
+    {
+      "id": "P15",
+      "playbookSection": "§7.1",
+      "termName": "Standstill",
+      "isRequired": false,
+      "isRequiredBasis": "Verdantis's strong and unequivocal preference is to accept no standstill provision in any M&A NDA.",
+      "standardPosition": [
+        "Verdantis's strong and unequivocal preference is to accept no standstill provision in any M&A NDA."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "If a standstill provision is commercially necessary to secure access to the counterparty's data room or to advance discussions to a stage where a transaction can be meaningfully evaluated, Verdantis may accept a standstill provision subject to all of the following conditions:",
+            "The standstill shall have a maximum duration of 12 months from the date of execution of the NDA.",
+            "The standstill shall automatically terminate, without notice or further action by either party, upon the earlier of:",
+            "The counterparty entering into a definitive agreement with any third party for a transaction involving the acquisition of a controlling interest in the counterparty (whether by merger, tender offer, asset acquisition, or otherwise); or",
+            "The counterparty commencing a public auction process, including without limitation by filing a proxy statement, issuing a press release, making a public announcement that it is exploring strategic alternatives or soliciting competing proposals, or otherwise publicly inviting third-party interest in acquiring the counterparty.",
+            "The standstill shall prohibit only the following actions: (i) acquiring, agreeing to acquire, or offering to acquire beneficial ownership of voting securities of the counterparty (other than through passive market purchases of less than a specified threshold); and (ii) making or publicly announcing any unsolicited proposal or offer for a merger, acquisition, business combination, or similar transaction involving the counterparty.",
+            "The standstill shall not restrict Verdantis from privately communicating with the counterparty's Board of Directors or senior management regarding a potential transaction, including making private proposals, requesting meetings, or expressing interest in a transaction, provided that such communications are not publicly disclosed by Verdantis."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "Verdantis will not accept a standstill period exceeding 12 months under any circumstances.",
+        "Acceptance of any standstill provision — even one conforming to all of the fallback parameters described above — constitutes a High Risk deviation and requires approval from both the General Counsel (Ramaswamy) and the VP, Corporate Development (Prescott).",
+        "In addition, the acceptance of any standstill provision triggers the board-level notification requirement described in Section 7.2 below.",
+        "The following are absolute walk-away positions that Verdantis will not accept under any circumstances, regardless of the commercial context:",
+        "A standstill period exceeding 12 months in duration;",
+        "A standstill without a mandatory fall-away provision of the type described above;",
+        "A standstill that restricts Verdantis from privately communicating with the counterparty's Board of Directors regarding a potential transaction;",
+        "\"Don't ask, don't waive\" provisions — i.e., provisions that prohibit Verdantis from requesting a waiver or modification of the standstill and/or prohibit the counterparty's Board of Directors from granting such a waiver, even if the Board determines that doing so would be in the best interests of the counterparty's shareholders."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: false or either; report-only."
+        },
+        {
+          "variation": "these approval sentences may be at the end of fallback 1 (its approval) instead of walkAwayPosition",
+          "sentences": [
+            "Acceptance of any standstill provision — even one conforming to all of the fallback parameters described above — constitutes a High Risk deviation and requires approval from both the General Counsel (Ramaswamy) and the VP, Corporate Development (Prescott).",
+            "In addition, the acceptance of any standstill provision triggers the board-level notification requirement described in Section 7.2 below."
+          ]
+        },
+        {
+          "variation": "this refusal sentence may be in fallback 1 instead of walkAwayPosition",
+          "sentences": [
+            "Verdantis will not accept a standstill period exceeding 12 months under any circumstances."
+          ]
+        },
+        {
+          "variation": "condition labels may be added or omitted",
+          "sentences": [
+            "Duration.",
+            "Mandatory Fall-Away.",
+            "Scope."
+          ]
+        },
+        {
+          "variation": "Section 7.2 board notification is procedure, not a separate term; an extra \"Board Notification\" position is report-only."
+        },
+        {
+          "variation": "fallback count: 1 or 2 (2 only if the two approval sentences form their own last rung)."
+        }
+      ],
+      "notes": "Standard is \"no standstill\". The Fallback block holds all conditions. The walk-away block both gives the approval for any standstill and lists the absolute walk-aways."
+    },
+    {
+      "id": "P16",
+      "playbookSection": "§8.1",
+      "termName": "General Remedies",
+      "isRequired": false,
+      "isRequiredBasis": "The NDA should provide that a breach of any provision of the NDA entitles the non-breaching party to seek all remedies available at law or in equity, including without limitation compensatory damages, consequential damages (to the extent proven), specific performance, and injunctive relief.",
+      "standardPosition": [
+        "The NDA should provide that a breach of any provision of the NDA entitles the non-breaching party to seek all remedies available at law or in equity, including without limitation compensatory damages, consequential damages (to the extent proven), specific performance, and injunctive relief.",
+        "The remedies clause should not include any limitation on the types of damages available, any cap on liability, or any exclusion of consequential, incidental, or indirect damages."
+      ],
+      "fallbacks": [],
+      "walkAwayPosition": [
+        "Any provision that limits the remedies available for breach of the NDA — including any cap on liability, any exclusion of consequential or indirect damages, or any limitation on the types of claims that may be asserted — is unacceptable."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "fallbacks: exactly zero. The playbook says \"Fallback Position. Same as the Preferred Position.\""
+        },
+        {
+          "variation": "standardPosition may also include",
+          "sentences": [
+            "Verdantis's position on the availability of the full range of remedies is not subject to negotiation."
+          ]
+        },
+        {
+          "variation": "P16 and P17 may be merged into one \"Remedies\" position; judge the union."
+        }
+      ]
+    },
+    {
+      "id": "P17",
+      "playbookSection": "§8.2",
+      "termName": "Equitable Relief / Injunctive Relief",
+      "isRequired": false,
+      "isRequiredBasis": "The NDA may include a provision acknowledging that a breach of the confidentiality obligations set forth in the NDA could cause irreparable harm to the Disclosing Party and that equitable relief, including injunctive relief, may be an appropriate remedy in addition to all other remedies available at law or in equity.",
+      "standardPosition": [
+        "The NDA may include a provision acknowledging that a breach of the confidentiality obligations set forth in the NDA could cause irreparable harm to the Disclosing Party and that equitable relief, including injunctive relief, may be an appropriate remedy in addition to all other remedies available at law or in equity.",
+        "However, Verdantis requires that the following two limitations be observed in any equitable-relief provision:",
+        "The NDA must require a court determination that irreparable harm exists before injunctive relief may issue.",
+        "The NDA must not waive the requirement to post a bond or other security as a condition to obtaining a temporary restraining order or preliminary injunction."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "Verdantis may accept an equitable-relief provision that includes an acknowledgment that the parties \"recognize the potential for irreparable harm\" in the event of a breach, provided that the operative injunctive-relief clause still requires the moving party to satisfy the applicable legal standard for injunctive relief in the relevant jurisdiction, including demonstrating irreparable harm to the satisfaction of the court and posting a bond or other security if required by the court."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "Provisions in which the parties \"agree,\" \"stipulate,\" \"acknowledge,\" or \"consent\" that a breach of the NDA will constitute irreparable harm as a matter of law — and that the non-breaching party is therefore entitled to injunctive relief without the need to demonstrate irreparable harm to the satisfaction of the court — are not acceptable.",
+        "The following provisions are classified as High Risk deviations, each requiring approval from the General Counsel (Ramaswamy) and the VP, Corporate Development (Prescott):",
+        "Any provision in which the parties agree, stipulate, acknowledge, or consent that a breach of the NDA will be deemed to constitute irreparable harm as a matter of law, entitling the non-breaching party to injunctive relief without the need to demonstrate irreparable harm to the court.",
+        "Any provision in which the parties waive, or agree not to require, the posting of a bond or other security as a condition to the issuance of a temporary restraining order or preliminary injunction."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "standardPosition may omit the lead-in and add the labels",
+          "sentences": [
+            "However, Verdantis requires that the following two limitations be observed in any equitable-relief provision:",
+            "No stipulated findings of irreparable harm.",
+            "No bond waiver."
+          ]
+        },
+        {
+          "variation": "sentence may be in standardPosition instead of walkAwayPosition",
+          "sentences": [
+            "Provisions in which the parties \"agree,\" \"stipulate,\" \"acknowledge,\" or \"consent\" that a breach of the NDA will constitute irreparable harm as a matter of law — and that the non-breaching party is therefore entitled to injunctive relief without the need to demonstrate irreparable harm to the satisfaction of the court — are not acceptable."
+          ]
+        },
+        {
+          "variation": "standardPosition may also include",
+          "sentences": [
+            "Bond waivers are disfavored in Delaware courts, and Verdantis's policy is to resist their inclusion in any M&A NDA."
+          ]
+        },
+        {
+          "variation": "walk-away block may instead be the last fallback (an approval rung, after all other fallbacks); walk-away may then be empty or keep only the remaining refusal sentences. Fallback count may be one higher.",
+          "sentences": [
+            "The following provisions are classified as High Risk deviations, each requiring approval from the General Counsel (Ramaswamy) and the VP, Corporate Development (Prescott):"
+          ]
+        },
+        {
+          "variation": "walk-away (or the approval rung) may also include the labels and examples",
+          "sentences": [
+            "Stipulated irreparable harm.",
+            "Bond waiver.",
+            "This includes formulations such as \"the parties agree that a breach of this Agreement will cause irreparable harm for which monetary damages would be an inadequate remedy.\"",
+            "This includes formulations such as \"no bond or other security shall be required in connection with any application for equitable relief\" and \"each party waives any requirement for the securing or posting of any bond.\""
+          ]
+        },
+        {
+          "variation": "position may be split into \"Stipulated irreparable harm\" and \"Bond waiver\"; judge the union."
+        },
+        {
+          "variation": "fallback count: 1 or 2."
+        }
+      ]
+    },
+    {
+      "id": "P18",
+      "playbookSection": "§9.1",
+      "termName": "Governing Law and Forum",
+      "isRequired": false,
+      "isRequiredBasis": "The NDA shall be governed by and construed in accordance with the laws of the State of Delaware, without regard to its conflicts-of-laws principles that would result in the application of the laws of any other jurisdiction.",
+      "standardPosition": [
+        "The NDA shall be governed by and construed in accordance with the laws of the State of Delaware, without regard to its conflicts-of-laws principles that would result in the application of the laws of any other jurisdiction.",
+        "Each party shall submit to the exclusive jurisdiction and venue of the Court of Chancery of the State of Delaware for any action, suit, or proceeding arising out of or relating to the NDA.",
+        "If the Court of Chancery declines to exercise jurisdiction over a particular matter, the parties shall submit to the exclusive jurisdiction of the United States District Court for the District of Delaware."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "Mandatory arbitration may be acceptable for damages claims if the counterparty insists, but Verdantis must preserve the right to seek injunctive relief in a court of competent jurisdiction without first exhausting arbitration procedures."
+          ],
+          "selfServe": false
+        },
+        {
+          "rung": 2,
+          "text": [
+            "If the counterparty insists on an alternative jurisdiction and Verdantis determines that the commercial importance of the Transaction warrants a concession on governing law and forum, New York law and the courts of the State of New York (specifically, the Supreme Court of the State of New York, New York County, or the United States District Court for the Southern District of New York) are acceptable alternatives.",
+            "Acceptance of New York as the governing law and forum is classified as a Low Risk deviation and may be approved by the Associate General Counsel (Castellano), subject to General Counsel concurrence if the counterparty also seeks other deviations."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "The following are unacceptable as governing law or forum provisions:",
+        "Governing law of a jurisdiction with limited M&A case law, unpredictable or underdeveloped equitable-remedy frameworks, or significant procedural disadvantages for Verdantis;",
+        "Governing law of a foreign jurisdiction (i.e., outside the United States), unless the Transaction involves a cross-border element that makes a foreign governing law unavoidable and the General Counsel (Ramaswamy) has approved the deviation;",
+        "Mandatory arbitration as the exclusive dispute-resolution mechanism for disputes arising under the NDA, particularly for disputes involving claims for injunctive or equitable relief."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "fallback order: the arbitration fallback (no approval stated) and the New York fallback (states AGC approval) may come in either order; the key follows the product rule that approval rungs come last."
+        },
+        {
+          "variation": "the arbitration sentence may stay in walkAwayPosition instead of being a fallback (it sits in the walk-away list)",
+          "sentences": [
+            "Mandatory arbitration may be acceptable for damages claims if the counterparty insists, but Verdantis must preserve the right to seek injunctive relief in a court of competent jurisdiction without first exhausting arbitration procedures."
+          ]
+        },
+        {
+          "variation": "the foreign-law bullet may stay in walkAwayPosition or form a last approval fallback (GC approval)",
+          "sentences": [
+            "Governing law of a foreign jurisdiction (i.e., outside the United States), unless the Transaction involves a cross-border element that makes a foreign governing law unavoidable and the General Counsel (Ramaswamy) has approved the deviation;"
+          ]
+        },
+        {
+          "variation": "the New York fallback must keep the AGC-approval sentence; omitting it fails J3."
+        },
+        {
+          "variation": "position may be split into \"Governing Law\" and \"Forum\"; judge the union."
+        },
+        {
+          "variation": "fallback count: 1 to 3."
+        }
+      ],
+      "notes": "Reordered: arbitration rung first, New York rung second, because the product puts approval rungs last and only the New York rung states an approver (\"may be approved by the Associate General Counsel\")."
+    },
+    {
+      "id": "P19",
+      "playbookSection": "§9.2",
+      "termName": "Waiver of Jury Trial",
+      "isRequired": false,
+      "isRequiredBasis": "A jury-trial waiver is preferred but is not a mandatory provision, and its absence does not constitute a walk-away position.",
+      "standardPosition": [
+        "The NDA should include a mutual waiver of the right to a trial by jury for any action, suit, or proceeding arising out of or relating to the NDA."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "If the counterparty is unwilling to include a jury-trial waiver, Verdantis may accept an NDA that is silent on the issue."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [],
+      "acceptable": [
+        {
+          "variation": "isRequired: false (playbook: \"not a mandatory provision\"); report-only."
+        },
+        {
+          "variation": "fallback 1 may also include the rating sentence",
+          "sentences": [
+            "Silence on jury-trial waiver is a Low Risk deviation and does not require escalation."
+          ]
+        },
+        {
+          "variation": "selfServe may be true (\"does not require escalation\"); report-only."
+        },
+        {
+          "variation": "walkAwayPosition may be empty or the \"not a walk-away\" sentence."
+        }
+      ]
+    },
+    {
+      "id": "P20",
+      "playbookSection": "§10.1",
+      "termName": "Assignment",
+      "isRequired": false,
+      "isRequiredBasis": "The NDA shall provide that neither party may assign the NDA or any of its rights or obligations hereunder without the prior written consent of the other party, which consent may be withheld in the non-assigning party's sole discretion, except that either party may assign the NDA, without the consent of the other party, to a successor entity in connection with a merger, consolidation, reorganization, or sale of all or substantially all of the assigning party's assets to which the NDA relates.",
+      "standardPosition": [
+        "The NDA shall provide that neither party may assign the NDA or any of its rights or obligations hereunder without the prior written consent of the other party, which consent may be withheld in the non-assigning party's sole discretion, except that either party may assign the NDA, without the consent of the other party, to a successor entity in connection with a merger, consolidation, reorganization, or sale of all or substantially all of the assigning party's assets to which the NDA relates."
+      ],
+      "fallbacks": [
+        {
+          "rung": 1,
+          "text": [
+            "Verdantis may accept a provision requiring the prior written consent of the other party for all assignments, including assignments to successors in connection with a change-of-control transaction."
+          ],
+          "selfServe": false
+        }
+      ],
+      "walkAwayPosition": [
+        "An NDA that permits unrestricted assignment by either party — i.e., that allows a party to assign the NDA to any third party without the consent of the other party and without limitation to change-of-control successors — is unacceptable."
+      ],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "fallback 1 may also include the rating sentence",
+          "sentences": [
+            "This is a Low Risk deviation."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P21",
+      "playbookSection": "§10.2",
+      "termName": "Amendment and Waiver",
+      "isRequired": false,
+      "isRequiredBasis": "The NDA shall provide that no amendment, modification, or supplement to the NDA shall be effective unless set forth in a written instrument signed by both parties.",
+      "standardPosition": [
+        "The NDA shall provide that no amendment, modification, or supplement to the NDA shall be effective unless set forth in a written instrument signed by both parties.",
+        "The NDA shall further provide that no waiver of any provision of the NDA shall be effective unless set forth in a written instrument signed by the waiving party, and that no waiver of any provision shall be deemed a waiver of any other provision or a continuing waiver of the same provision."
+      ],
+      "fallbacks": [],
+      "walkAwayPosition": [],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "must be present (J1): the section has no labels but states what the NDA \"shall provide\"."
+        },
+        {
+          "variation": "position may be split into \"Amendment\" and \"Waiver\"; judge the union."
+        }
+      ]
+    },
+    {
+      "id": "P22",
+      "playbookSection": "§10.3",
+      "termName": "Entire Agreement",
+      "isRequired": true,
+      "isRequiredBasis": "The NDA shall include a standard entire-agreement clause providing that the NDA constitutes the entire agreement between the parties with respect to the subject matter hereof and supersedes all prior and contemporaneous negotiations, representations, understandings, and agreements, whether written or oral, relating to the subject matter of the NDA.",
+      "standardPosition": [
+        "The NDA shall include a standard entire-agreement clause providing that the NDA constitutes the entire agreement between the parties with respect to the subject matter hereof and supersedes all prior and contemporaneous negotiations, representations, understandings, and agreements, whether written or oral, relating to the subject matter of the NDA."
+      ],
+      "fallbacks": [],
+      "walkAwayPosition": [],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "standardPosition may also include",
+          "sentences": [
+            "If such separate agreements exist, outside counsel should include appropriate savings language."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P23",
+      "playbookSection": "§10.4",
+      "termName": "Notices",
+      "isRequired": false,
+      "isRequiredBasis": "All notices, requests, demands, and other communications required or permitted under the NDA shall be in writing and shall be delivered personally, by nationally recognized overnight courier service, or by certified mail (return receipt requested), and shall be deemed given upon receipt.",
+      "standardPosition": [
+        "All notices, requests, demands, and other communications required or permitted under the NDA shall be in writing and shall be delivered personally, by nationally recognized overnight courier service, or by certified mail (return receipt requested), and shall be deemed given upon receipt.",
+        "Notices to Verdantis should be directed to the following address:",
+        "Verdantis Solutions Inc.",
+        "900 Ridgeview Boulevard, Suite 1400 Wilmington, DE 19801",
+        "Attention: General Counsel",
+        "With a copy (which shall not constitute notice) to outside counsel as designated by Verdantis in writing from time to time.",
+        "Notices to the counterparty shall be directed to the address specified in the NDA or such other address as the counterparty may designate by written notice in accordance with the NDA's notice provisions."
+      ],
+      "fallbacks": [],
+      "walkAwayPosition": [],
+      "acceptable": [
+        {
+          "variation": "isRequired: either."
+        },
+        {
+          "variation": "standardPosition may omit",
+          "sentences": [
+            "With a copy (which shall not constitute notice) to outside counsel as designated by Verdantis in writing from time to time."
+          ]
+        },
+        {
+          "variation": "standardPosition may also include",
+          "sentences": [
+            "Outside counsel should ensure that the NDA permits the designation of an updated notice address by written notice and that the notice provisions are reciprocal, applying equally to both parties."
+          ]
+        }
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "section": "Front matter (title, custodian, privilege notice, TOC line)",
+      "reason": "Document details and boilerplate; no term."
+    },
+    {
+      "section": "§1",
+      "reason": "Purpose and scope of the playbook, supersession and deviation-approval rules; no negotiation position on a contract term."
+    },
+    {
+      "section": "§1A",
+      "reason": "Engagement rules (No review / Legal review bands); no contract term. Source of selfServe=false for all fallbacks (\"There is no self-serve band and no set of self-serve fallbacks.\")."
+    },
+    {
+      "section": "§2 (2.1, 2.2, 2.3)",
+      "reason": "Approval Authority Matrix: risk-tier definitions, approvers and approval procedures (guidelines/escalation), not positions. Its examples restate positions from §3-§9."
+    },
+    {
+      "section": "§3, §4, §5, §6, §7, §8, §10 section intros",
+      "reason": "Background/rationale paragraphs before the numbered subsections; no position."
+    },
+    {
+      "section": "§7.2",
+      "reason": "Board notification protocol: internal procedure for accepting a standstill, not a contract term; folded into §7.1 context only."
+    },
+    {
+      "section": "Appendix A",
+      "reason": "Quick-reference summary table repeating body positions; body controls."
+    },
+    {
+      "section": "Appendix B",
+      "reason": "Negotiation guidance notes for outside counsel (process guidelines)."
+    },
+    {
+      "section": "Document Control / Version History / Notice / signature blocks",
+      "reason": "Document details and boilerplate."
+    }
+  ]
+}

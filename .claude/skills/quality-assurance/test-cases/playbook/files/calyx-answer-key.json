@@ -1,0 +1,552 @@
+{
+  "agreement": "fixtures/documents/calyx-draft-nda.pdf (Calyx Data Systems LLC / Verdantis Solutions Inc. mutual NDA, TWL-2025-04217-001)",
+  "playbook": "NDA Playbook on dev Ask Kes Anything (Verdantis M&A NDA Negotiation Playbook v4.2)",
+  "expectedBand": "legal",
+  "bandReason": "Playbook §1A: any counterparty paper goes to Legal review. The Calyx draft is counterparty paper, so a redline must be produced and the matter must not be Completed.",
+  "failRules": [
+    "F1 A critical item is missing from the deviation table.",
+    "F2 A critical item is rated acceptable or within a fallback.",
+    "F3 The redline leaves a critical clause unchanged, or changes it in a way that does not meet that item's redlineMust.",
+    "F4 The redline or deviation table quotes agreement text that is not in the agreement, or cites the wrong clause for a critical item.",
+    "F5 The redline concedes past a walk-away position (for example keeps survival above 3 years, or keeps an 18-month standstill).",
+    "F6 Fewer than 80% of the minor items are in the deviation table."
+  ],
+  "critical": [
+    {
+      "id": "C1",
+      "term": "Standard exclusions: independent development",
+      "playbookSection": "§3.1",
+      "agreementClause": "Section 1(b)",
+      "agreementQuote": "\"Confidential Information\" shall not include any information that:",
+      "deviation": "Section 1(b) lists public domain, prior possession, third-party receipt and compelled disclosure, but has no independent-development exclusion.",
+      "standardPosition": "All five exclusions are required, including information independently developed by the Receiving Party or its Representatives without reference to or use of the Disclosing Party's Confidential Information, as shown by contemporaneous written records.",
+      "expectedVerdict": "walk_away",
+      "riskTier": "High",
+      "redlineMust": "Insert an independent-development exclusion in Section 1(b): independently developed without reference to or use of the Disclosing Party's Confidential Information, shown by contemporaneous written records.",
+      "positionRef": [
+        "P1"
+      ],
+      "agreementClauseText": "Section 1(b) — Exclusions from Confidential Information. Notwithstanding the foregoing, \"Confidential Information\" shall not include any information that: (i) is or becomes generally available to the public other than as a result of disclosure by the Receiving Party or any of its Permitted Disclosees in violation of this Agreement; (ii) was already in the possession of the Receiving Party prior to its disclosure by or on behalf of the Disclosing Party, as evidenced by the Receiving Party's contemporaneous written records existing prior to the date of such disclosure; (iii) is received by the Receiving Party from a third party that is not, to the Receiving Party's knowledge after reasonable inquiry, bound by any obligation of confidentiality to the Disclosing Party with respect to such information; or (iv) is required to be disclosed by applicable law, regulation, or legal process, provided that the Receiving Party complies with the requirements of Section 3 of this Agreement. The burden of establishing the applicability of any of the foregoing exclusions shall rest with the Receiving Party, and any such exclusion shall be narrowly construed. In the case of clause (i) above, specific items of Confidential Information shall not be deemed to be within the public domain merely because the information is embraced by more general information in the public domain, and any combination of features shall not be deemed to be in the public domain merely because individual features are in the public domain unless the combination itself and its principle of operation are in the public domain.",
+      "standardPositionText": [
+        "The NDA must contain all five of the following standard exclusions from the definition of \"Confidential Information.\"",
+        "Information independently developed by the Receiving Party or its Representatives without reference to or use of the Disclosing Party's Confidential Information, as demonstrated by contemporaneous written records."
+      ],
+      "expectedTableRow": {
+        "term": "Exclusions: independent development",
+        "risk": [
+          "High"
+        ],
+        "reason": "Section 1(b) has no exclusion for information the Receiving Party develops independently, one of the five required exclusions.",
+        "positionAsked": "Add an independent-development exclusion, shown by contemporaneous written records."
+      },
+      "exampleRedline": "Section 1(b): delete \"or\" at the end of clause (iii), replace the full stop at the end of clause (iv) with \"; or\", and insert: \"(v) is independently developed by the Receiving Party or its Permitted Disclosees without reference to or use of the Disclosing Party's Confidential Information, as demonstrated by the Receiving Party's contemporaneous written records.\""
+    },
+    {
+      "id": "C2",
+      "term": "Definition of Representatives / Permitted Disclosees",
+      "playbookSection": "§3.2",
+      "agreementClause": "Sections 1(c) and 1(d)",
+      "agreementQuote": "\"Permitted Disclosees\" means the officers, directors, and employees of the Receiving Party",
+      "deviation": "Permitted Disclosees are limited to officers, directors and employees, and Section 1(d) expressly rules out any broader category of Representatives, so legal counsel, financial advisors, lenders and co-investors are excluded.",
+      "standardPosition": "Representatives include directors, officers and employees plus legal counsel, financial advisors, accounting advisors and auditors, potential lenders and their advisors, and potential co-investors and their advisors, each with a need to know.",
+      "expectedVerdict": "walk_away",
+      "riskTier": "High",
+      "redlineMust": "Expand Section 1(c) to add legal counsel, financial advisors, accountants/auditors, potential lenders and potential co-investors (with their advisors), and delete or reverse Section 1(d).",
+      "positionRef": [
+        "P2"
+      ],
+      "agreementClauseText": "Section 1(c) — \"Permitted Disclosees.\" As used in this Agreement, \"Permitted Disclosees\" means the officers, directors, and employees of the Receiving Party who (A) have a bona fide need to know the Confidential Information for the sole purpose of evaluating the Transaction, (B) have been informed of the confidential nature of the Confidential Information, and (C) have agreed to be bound by the terms and conditions of this Agreement as if they were a party hereto. The Receiving Party shall maintain a current list of its Permitted Disclosees who have received Confidential Information hereunder and shall make such list available to the Disclosing Party upon reasonable request.\n\nSection 1(d) — No Broader Category of \"Representatives.\" For the avoidance of doubt, this Agreement does not define or authorize any separate or broader category of \"Representatives\" beyond the Permitted Disclosees described in Section 1(c). The Receiving Party is not authorized to disclose Confidential Information to any person or entity other than its Permitted Disclosees without the prior written consent of the Disclosing Party.",
+      "standardPositionText": [
+        "The term \"Representatives\" (or \"Permitted Disclosees,\" depending on the counterparty's preferred nomenclature) must be defined broadly to include the Receiving Party's directors, officers, and employees, together with the following categories of external advisors and parties, in each case who have a need to know the Confidential Information in connection with evaluating or consummating the Transaction:",
+        "Legal counsel (including outside counsel retained by the Receiving Party for the Transaction or for related legal matters);",
+        "Financial advisors (including investment bankers, valuation consultants, and other financial advisors engaged by the Receiving Party);",
+        "Accounting advisors and auditors (including the Receiving Party's independent auditors and any accounting advisors specifically engaged for the Transaction);",
+        "Potential lenders and their respective advisors (including banks, financial institutions, and other credit providers that the Receiving Party may approach in connection with financing the Transaction, together with the legal, financial, and accounting advisors of such potential lenders);",
+        "Potential co-investors and their respective advisors (including equity co-investors, co-bidders, consortium members, and similar parties, together with their legal, financial, and accounting advisors).",
+        "The definition must be sufficiently broad to encompass Verdantis's existing advisor relationships and to ensure that Verdantis can share Confidential Information with the full range of professional advisors necessary to evaluate and, if applicable, consummate a Transaction."
+      ],
+      "expectedTableRow": {
+        "term": "Definition of Representatives / Permitted Disclosees",
+        "risk": [
+          "High"
+        ],
+        "reason": "Disclosure is limited to officers, directors and employees, and Section 1(d) bars any broader category, so advisors, lenders and co-investors cannot receive information.",
+        "positionAsked": "A broad definition covering legal counsel, financial and accounting advisors, auditors, potential lenders and co-investors (with their advisors), each with a need to know; delete Section 1(d)."
+      },
+      "exampleRedline": "Replace Section 1(c) with: \"Section 1(c) — \"Permitted Disclosees.\" As used in this Agreement, \"Permitted Disclosees\" means the directors, officers and employees of the Receiving Party and its legal counsel, financial advisors, accounting advisors and auditors, potential lenders and their respective advisors, and potential co-investors and their respective advisors, in each case who need to know the Confidential Information in connection with evaluating or consummating the Transaction and have been informed of its confidential nature.\" Delete Section 1(d) in its entirety."
+    },
+    {
+      "id": "C3",
+      "term": "Survival of confidentiality obligations",
+      "playbookSection": "§4.1",
+      "agreementClause": "Section 12",
+      "agreementQuote": "shall survive for a period of five (5) years from the Effective Date",
+      "deviation": "Confidentiality obligations survive five years, beyond the three-year maximum.",
+      "standardPosition": "Two years from execution; up to three years is the fallback; over three years is a walk-away.",
+      "expectedVerdict": "walk_away",
+      "riskTier": "Medium or High (§4.1: Medium while under negotiation, High on firm insistence)",
+      "redlineMust": "Reduce the survival period in Section 12 to two years. Three years is a fallback and must not be proposed in a first redline (Appendix B).",
+      "positionRef": [
+        "P6"
+      ],
+      "agreementClauseText": "The obligations of confidentiality, non-disclosure, and non-use set forth in this Agreement shall survive for a period of five (5) years from the Effective Date (the \"Confidentiality Period\"), regardless of whether the Transaction is consummated or whether discussions or negotiations between the Parties are terminated or abandoned. The provisions of Sections 5 (Warranty Disclaimer), 10 (Remedies), 11 (Governing Law and Jurisdiction), and 13 (Miscellaneous) shall survive the expiration or termination of this Agreement and the Confidentiality Period and shall remain in full force and effect indefinitely. The obligations set forth in Section 8 (Non-Solicitation of Employees) and Section 9 (Standstill) shall survive for the respective periods set forth therein.",
+      "standardPositionText": [
+        "Confidentiality obligations under the NDA shall survive for a period of 2 years from the date of execution of the NDA, regardless of whether a Transaction is consummated and regardless of whether the NDA is terminated earlier by either party."
+      ],
+      "expectedTableRow": {
+        "term": "Survival of confidentiality obligations",
+        "risk": [
+          "Medium",
+          "High"
+        ],
+        "reason": "Confidentiality obligations survive five years, beyond the three-year maximum.",
+        "positionAsked": "Two years."
+      },
+      "exampleRedline": "Section 12, first sentence: replace \"five (5) years\" with \"two (2) years\", so it reads \"The obligations of confidentiality, non-disclosure, and non-use set forth in this Agreement shall survive for a period of two (2) years from the Effective Date (the \"Confidentiality Period\"), regardless of whether the Transaction is consummated or whether discussions or negotiations between the Parties are terminated or abandoned.\""
+    },
+    {
+      "id": "C4",
+      "term": "Residuals clause",
+      "playbookSection": "§4.3",
+      "agreementClause": "Not in the agreement",
+      "agreementQuote": "",
+      "deviation": "The agreement has no residuals clause. The playbook makes it mandatory.",
+      "standardPosition": "A residuals clause letting each party use ideas, concepts, know-how and techniques retained in the unaided memory of its Representatives, with no duty to restrict their work, and a ban on intentional memorization to get around the agreement.",
+      "expectedVerdict": "not_addressed or walk_away",
+      "riskTier": "Medium",
+      "redlineMust": "Insert a residuals clause covering unaided memory, no restriction on reassignment, and no intentional memorization.",
+      "positionRef": [
+        "P8"
+      ],
+      "agreementClauseText": "",
+      "standardPositionText": [
+        "The NDA must include a residuals clause permitting each party's personnel to use general knowledge, ideas, concepts, know-how, and techniques that are retained in the unaided memory of the Receiving Party's Representatives following their exposure to the Disclosing Party's Confidential Information, provided that such use does not constitute disclosure of specific Confidential Information or the reproduction of any tangible embodiment of Confidential Information.",
+        "The residuals clause is a mandatory provision and must appear in every M&A NDA to which Verdantis is a party."
+      ],
+      "expectedTableRow": {
+        "term": "Residuals clause",
+        "risk": [
+          "Medium"
+        ],
+        "reason": "The agreement has no residuals clause, which is mandatory.",
+        "positionAsked": "Add a residuals clause for information retained in unaided memory, with no restriction on work assignments and no intentional memorisation."
+      },
+      "exampleRedline": "Insert new Section 2(d) — Residuals: \"Notwithstanding anything to the contrary in this Agreement, each Party and its Permitted Disclosees may use the general knowledge, ideas, concepts, know-how and techniques retained in the unaided memory of its Permitted Disclosees following exposure to the Disclosing Party's Confidential Information, provided that such use does not disclose specific Confidential Information or reproduce any tangible embodiment of it. A person's memory is unaided only if the person has not intentionally memorized Confidential Information for the purpose of retaining and later using or disclosing it. Neither Party shall be obliged to restrict the work assignments of any Permitted Disclosee who had access to Confidential Information.\""
+    },
+    {
+      "id": "C5",
+      "term": "Return/destruction timeline and retention carve-outs",
+      "playbookSection": "§5.2",
+      "agreementClause": "Sections 7(a) and 7(b)",
+      "agreementQuote": "within five (5) business days of the date of such written request",
+      "deviation": "Five business days, at the Disclosing Party's election, with no regulatory/legal-hold carve-out and no electronic-archive carve-out; Section 7(b) also requires purging electronic copies including backups and cloud storage.",
+      "standardPosition": "Fifteen business days at the Receiving Party's election, with both a regulatory/legal-hold carve-out and an electronically archived copies carve-out.",
+      "expectedVerdict": "walk_away",
+      "riskTier": "Medium",
+      "redlineMust": "Extend the period to 15 business days and add both carve-outs: copies retained under law, regulation, retention policy or legal hold, and copies in backup/archive systems where deletion is not commercially practicable, both still confidential. Ten business days is a fallback and must not be proposed in a first redline (Appendix B).",
+      "positionRef": [
+        "P10"
+      ],
+      "agreementClauseText": "Section 7(a) — Obligation to Return or Destroy. Upon the written request of the Disclosing Party at any time, the Receiving Party shall promptly, and in any event within five (5) business days of the date of such written request, at the Disclosing Party's election, either (i) return to the Disclosing Party all Confidential Information (including all copies, extracts, reproductions, and summaries thereof) in the possession or control of the Receiving Party or any of its Permitted Disclosees, or (ii) destroy all such Confidential Information. Promptly following such return or destruction, and in any event within five (5) business days of the date of the Disclosing Party's written request, the Receiving Party shall provide to the Disclosing Party a written certification of such return or destruction, which certification shall be signed by an authorized officer of the Receiving Party and shall confirm that all Confidential Information, including all copies, extracts, reproductions, and summaries thereof, has been returned or destroyed in accordance with this Section 7.\n\nSection 7(b) — Scope of Return/Destruction. The obligation to return or destroy Confidential Information set forth in Section 7(a) extends to all documents, memoranda, notes, analyses, compilations, studies, interpretations, and any other written, electronic, or other tangible materials (in whatever form or medium) that contain, reflect, are based upon, or are derived from the Confidential Information, regardless of the medium in which such materials are stored and regardless of whether such materials were prepared by the Disclosing Party or by the Receiving Party or any of its Permitted Disclosees. Without limiting the foregoing, the Receiving Party shall undertake reasonable steps to permanently delete or purge any Confidential Information stored in electronic form on any servers, hard drives, removable storage devices, cloud-based storage platforms, or other electronic systems within the Receiving Party's possession or control.",
+      "standardPositionText": [
+        "Upon the occurrence of a triggering event described in Section 5.1, the Receiving Party shall return to the Disclosing Party or destroy (at the Receiving Party's election) all Confidential Information, including all copies, notes, summaries, analyses, compilations, and other materials prepared by the Receiving Party or its Representatives that contain, reflect, or are derived from Confidential Information, within 15 business days of the triggering event.",
+        "The return/destruction obligation must be subject to the following two carve-outs, both of which are required in every M&A NDA to which Verdantis is a party:",
+        "The Receiving Party may retain copies of Confidential Information to the extent required by applicable law, regulation, or bona fide internal document-retention policy, or to the extent subject to a litigation hold, regulatory investigation, or other preservation obligation imposed by a court, regulatory authority, or the Receiving Party's legal counsel.",
+        "Such retained copies (collectively, \"Retained Copies\") remain subject to the confidentiality obligations of the NDA for the full duration of the applicable survival period set forth in Section 4.1.",
+        "The Receiving Party shall not be required to purge, delete, or otherwise remove Confidential Information from electronic archival, backup, or disaster-recovery systems (including, without limitation, disaster-recovery tapes, automated email archive systems, network backup servers, and similar systems) where deletion is not commercially practicable using reasonable efforts.",
+        "Confidential Information retained on such systems shall not be intentionally accessed by the Receiving Party or its Representatives following the return/destruction date and shall remain subject to the NDA's confidentiality obligations for the full duration of the applicable survival period."
+      ],
+      "expectedTableRow": {
+        "term": "Return/destruction timeline and retention carve-outs",
+        "risk": [
+          "Medium"
+        ],
+        "reason": "Five business days at the Disclosing Party's election, with no legal-hold or electronic-archive carve-out, and Section 7(b) requires purging backups.",
+        "positionAsked": "Fifteen business days at the Receiving Party's election, with legal/regulatory-hold and electronic-archive carve-outs."
+      },
+      "exampleRedline": "Section 7(a): replace both instances of \"five (5) business days\" with \"fifteen (15) business days\" and \"at the Disclosing Party's election\" with \"at the Receiving Party's election\". Section 7(b), last sentence: begin it with \"Subject to Section 7(c),\". Insert new Section 7(c) — Retained Copies: \"Notwithstanding Sections 7(a) and 7(b), the Receiving Party and its Permitted Disclosees (i) may retain copies of Confidential Information to the extent required by applicable law, regulation or bona fide internal document-retention policy, or to the extent subject to a litigation hold, regulatory investigation or other preservation obligation, and (ii) shall not be required to purge Confidential Information from electronic archival, backup or disaster-recovery systems where deletion is not commercially practicable using reasonable efforts. Confidential Information so retained shall remain subject to this Agreement for the Confidentiality Period, and Confidential Information on such systems shall not be intentionally accessed.\""
+    },
+    {
+      "id": "C6",
+      "term": "Non-disclosure of discussions: securities-law carve-out",
+      "playbookSection": "§6.1",
+      "agreementClause": "Section 4",
+      "agreementQuote": "Without the prior written consent of the other Party, neither Party shall disclose to any person",
+      "deviation": "The non-disclosure-of-discussions clause has no carve-out for securities laws, stock-exchange rules or legal process.",
+      "standardPosition": "A mandatory carve-out for disclosures required by applicable securities laws (including Regulation FD), stock-exchange rules (Nasdaq) and subpoena, court order or other legal process.",
+      "expectedVerdict": "walk_away",
+      "riskTier": "High",
+      "redlineMust": "Add a carve-out to Section 4 for disclosures required by securities laws, stock-exchange rules, and subpoena, court order or other legal process. Securities and exchange rules alone is the fallback and must not be proposed in a first redline (Appendix B).",
+      "positionRef": [
+        "P12"
+      ],
+      "agreementClauseText": "Without the prior written consent of the other Party, neither Party shall disclose to any person (other than its Permitted Disclosees who have a need to know such information for the purpose of evaluating the Transaction) the existence of this Agreement, the fact that Confidential Information has been requested or made available, that discussions or negotiations are taking place between the Parties concerning the Transaction, or any of the terms, conditions, status, or other facts with respect to the Transaction, including the status thereof or the identity of the Parties involved therein.",
+      "standardPositionText": [
+        "However, the non-disclosure-of-discussions provision must contain a mandatory carve-out permitting disclosures of Transaction Information required under:",
+        "Applicable securities laws, including without limitation the Securities Act of 1933, as amended, the Securities Exchange Act of 1934, as amended, and the rules and regulations promulgated thereunder by the United States Securities and Exchange Commission (the \"SEC\"), including Regulation FD;",
+        "Stock-exchange rules, including the rules and listing standards of the Nasdaq Stock Market LLC, given Verdantis's listing on Nasdaq under the ticker symbol VRDS;",
+        "Subpoena, court order, or other compulsory legal process, including civil or criminal subpoenas, regulatory demands, and orders or requests issued by any court, governmental authority, or self-regulatory organization.",
+        "In the event of any conflict between the NDA obligations and securities-law disclosure requirements, the securities-law obligations must control."
+      ],
+      "expectedTableRow": {
+        "term": "Non-disclosure of discussions: legal-disclosure carve-out",
+        "risk": [
+          "High"
+        ],
+        "reason": "Section 4 has no carve-out for disclosures required by securities laws, stock-exchange rules or legal process.",
+        "positionAsked": "A carve-out for disclosures required by securities laws, stock-exchange rules and subpoena, court order or other legal process, with securities law controlling."
+      },
+      "exampleRedline": "Add at the end of Section 4: \"Notwithstanding the foregoing, either Party may make any disclosure required by applicable securities laws (including Regulation FD), the rules of any stock exchange on which its securities are listed, or any subpoena, court order or other legal process, and in the event of any conflict between this Section 4 and such securities-law requirements, the securities-law requirements shall control.\""
+    },
+    {
+      "id": "C7",
+      "term": "Non-solicitation of employees",
+      "playbookSection": "§6.3",
+      "agreementClause": "Sections 8(a), 8(b) and 8(c)",
+      "agreementQuote": "For a period of eighteen (18) months following the Effective Date",
+      "deviation": "Eighteen months; covers any employee the Receiving Party had contact with or whose identity became known (not only those introduced); bars hiring, retaining or engaging, not just soliciting (a no-hire); $150,000 liquidated damages per employee in Section 8(b); no unsolicited-contact exception.",
+      "standardPosition": "No non-solicitation provision. If one is required: at most 12 months, limited to personnel introduced in the diligence process, general-solicitation and unsolicited-contact exceptions, actual damages only and no liquidated damages.",
+      "expectedVerdict": "walk_away",
+      "riskTier": "High",
+      "redlineMust": "Either delete Section 8 (preferred), or do all of: cut the period to 12 months, limit it to personnel introduced in diligence, limit it to soliciting (remove 'hire, retain, or engage'), delete the Section 8(b) liquidated damages for actual damages, and add the unsolicited-contact exception.",
+      "positionRef": [
+        "P14"
+      ],
+      "agreementClauseText": "Section 8(a) — Non-Solicitation Covenant. For a period of eighteen (18) months following the Effective Date, the Receiving Party shall not, directly or indirectly, whether alone or in conjunction with any other person or entity, solicit for employment, hire, retain, or engage as an independent contractor or consultant, any employee of the Disclosing Party with whom the Receiving Party or any of its Permitted Disclosees had contact, or whose identity or qualifications became known to the Receiving Party or any of its Permitted Disclosees, during the course of evaluating the Transaction.\n\nSection 8(b) — Liquidated Damages. The Parties acknowledge and agree that a breach of Section 8(a) would result in damages to the Disclosing Party that are difficult, if not impossible, to ascertain with precision at the time of this Agreement. Accordingly, in the event of any breach of Section 8(a), the breaching Party shall pay to the non-breaching Party, as liquidated damages and not as a penalty, the sum of One Hundred Fifty Thousand Dollars ($150,000) per breach (i.e., per employee solicited, hired, retained, or engaged in violation of Section 8(a)). The Parties acknowledge and agree that such liquidated damages amount represents a genuine pre-estimate and reasonable approximation of the damages likely to be incurred by the non-breaching Party as a result of such breach and is not intended to serve as, and shall not be construed as, a penalty. The payment of liquidated damages under this Section 8(b) shall not relieve the breaching Party of its obligation to cease and desist from any continuing violation of Section 8(a), and the non-breaching Party shall retain the right to seek injunctive or other equitable relief to enforce such cessation.\n\nSection 8(c) — Exceptions. Notwithstanding the foregoing, the restrictions set forth in Section 8(a) shall not apply to: (i) general solicitations of employment that are not specifically directed at employees of the Disclosing Party, including, without limitation, public advertisements, postings on internet job boards, postings on the Receiving Party's website, or general employment agency searches, provided that the Receiving Party does not specifically target employees of the Disclosing Party through such general solicitations; or (ii) solicitations made by third-party recruiting firms, executive search firms, or employment agencies that are not acting at the specific direction of the Receiving Party with respect to any particular employee of the Disclosing Party, provided that the Receiving Party has not instructed or encouraged such third-party firm to target employees of the Disclosing Party. For the avoidance of doubt, the exceptions set forth in this Section 8(c) shall not apply if the Receiving Party otherwise directs, encourages, or facilitates the solicitation of any specific employee of the Disclosing Party by any means, whether direct or indirect.",
+      "standardPositionText": [
+        "Verdantis's preferred position is to include no non-solicitation provision in the M&A NDA."
+      ],
+      "expectedTableRow": {
+        "term": "Non-solicitation of employees",
+        "risk": [
+          "High"
+        ],
+        "reason": "An 18-month no-hire covering any employee the Receiving Party learns of, with $150,000 liquidated damages per employee.",
+        "positionAsked": "No non-solicitation provision (delete Section 8)."
+      },
+      "exampleRedline": "Delete Section 8 in its entirety, and delete the last sentence of Section 12 (\"The obligations set forth in Section 8 (Non-Solicitation of Employees) and Section 9 (Standstill) shall survive for the respective periods set forth therein.\"), since Sections 8 and 9 are both deleted."
+    },
+    {
+      "id": "C8",
+      "term": "Standstill",
+      "playbookSection": "§7.1",
+      "agreementClause": "Sections 9(a) and 9(b)",
+      "agreementQuote": "For a period of eighteen (18) months from the Effective Date (the \"Standstill Period\")",
+      "deviation": "Eighteen-month standstill; Section 9(b) says it never falls away; 9(a)(iii) bars proposing a transaction 'whether publicly or otherwise', so private approaches to the board are barred; 9(a)(vi) bars asking for a waiver ('don't ask, don't waive'); scope goes beyond acquisitions and unsolicited proposals to proxies (ii), groups (iv) and control (v), and 9(a)(i) reaches debt securities and assets with no passive-purchase threshold.",
+      "standardPosition": "No standstill. If commercially necessary: at most 12 months, automatic fall-away on a third-party definitive agreement or a public auction, private communications with the board allowed, no 'don't ask, don't waive'. Any standstill is High Risk and needs board notification.",
+      "expectedVerdict": "walk_away",
+      "riskTier": "High (absolute walk-away terms present)",
+      "redlineMust": "Delete Section 9. The preferred position is no standstill; a 12-month standstill with fall-away is a fallback and must not be proposed in a first redline (Appendix B).",
+      "positionRef": [
+        "P15"
+      ],
+      "agreementClauseText": "Section 9(a) — Standstill Restrictions. For a period of eighteen (18) months from the Effective Date (the \"Standstill Period\"), unless specifically invited in writing by the board of directors or the Chief Executive Officer of the other Party, neither Party shall, and each Party shall cause its affiliates and representatives not to, directly or indirectly: (i) acquire, or offer, propose, or agree to acquire, by purchase, tender offer, exchange offer, merger, consolidation, business combination, recapitalization, restructuring, or in any other manner, beneficial ownership (as defined in Rule 13d-3 under the Securities Exchange Act of 1934, as amended (the \"Exchange Act\")) of any securities (including, without limitation, equity securities, debt securities, convertible securities, and any rights, options, or warrants to acquire any of the foregoing) or assets of the other Party or any of its subsidiaries; (ii) make, or in any way participate, directly or indirectly, in any solicitation of proxies, authorizations, or consents (as such terms are defined or used in Regulation 14A under the Exchange Act) with respect to any securities of the other Party or any of its subsidiaries, or become a \"participant\" in a \"solicitation\" (as such terms are defined or used in Regulation 14A under the Exchange Act) with respect thereto, or seek to advise, encourage, or influence any person with respect to the voting or disposition of any securities of the other Party or any of its subsidiaries; (iii) make any public announcement, proposal, or offer with respect to, or otherwise solicit, seek, or propose (whether publicly or otherwise), any extraordinary transaction involving the other Party or any of its subsidiaries, including any merger, consolidation, business combination, tender offer, exchange offer, recapitalization, restructuring, liquidation, dissolution, or similar transaction, or any purchase or sale of all or a material portion of the assets or business of the other Party or any of its subsidiaries; (iv) form, join, or in any way participate in a \"group\" (within the meaning of Section 13(d)(3) of the Exchange Act) with respect to any securities of the other Party or any of its subsidiaries, or enter into any discussions, negotiations, agreements, arrangements, or understandings with any third party with respect to any of the foregoing; (v) seek or propose, alone or in concert with others, to control or influence the management, board of directors, governing body, or policies of the other Party, including by seeking representation on the board of directors of the other Party, calling or seeking to call a meeting of the shareholders or members of the other Party, or initiating or participating in any shareholder or member proposal or consent solicitation; or (vi) take any action, or disclose any intention, plan, or arrangement, that could reasonably be expected to require the other Party to make a public announcement regarding any of the matters described in clauses (i) through (v) above, or request or propose, whether publicly or privately, that the other Party (or any of its officers, directors, or representatives) amend, waive, or terminate any provision of this Section 9.\n\nSection 9(b) — Duration. The standstill restrictions set forth in this Section 9 shall remain in full force and effect for the entire Standstill Period and shall not terminate, lapse, or otherwise fall away prior to the expiration of such period under any circumstances.",
+      "standardPositionText": [
+        "Verdantis's strong and unequivocal preference is to accept no standstill provision in any M&A NDA."
+      ],
+      "expectedTableRow": {
+        "term": "Standstill",
+        "risk": [
+          "High"
+        ],
+        "reason": "An 18-month standstill that never falls away, bars private approaches and waiver requests, and reaches proxies, groups and control.",
+        "positionAsked": "No standstill (delete Section 9)."
+      },
+      "exampleRedline": "Delete Section 9 in its entirety, and delete the last sentence of Section 12 (\"The obligations set forth in Section 8 (Non-Solicitation of Employees) and Section 9 (Standstill) shall survive for the respective periods set forth therein.\"), since Sections 8 and 9 are both deleted."
+    },
+    {
+      "id": "C9",
+      "term": "Equitable relief: stipulated irreparable harm and bond waiver",
+      "playbookSection": "§8.2",
+      "agreementClause": "Section 10(a)",
+      "agreementQuote": "without the necessity of (i) proving actual damages or the existence of irreparable harm, (ii) posting any bond, surety, or other security",
+      "deviation": "Relief is available without proving irreparable harm or posting a bond, the parties stipulate entitlement on a showing of breach, and the Receiving Party waives any bond requirement.",
+      "standardPosition": "A court must find irreparable harm, and the bond requirement must not be waived. An acknowledgment of potential irreparable harm is acceptable.",
+      "expectedVerdict": "walk_away",
+      "riskTier": "High",
+      "redlineMust": "Remove the stipulation of irreparable harm and the bond waiver from Section 10(a), so the moving party must meet the legal standard and post a bond if the court requires.",
+      "positionRef": [
+        "P17"
+      ],
+      "agreementClauseText": "Section 10(a) — Injunctive Relief. Each Party acknowledges and agrees that any breach or threatened breach of this Agreement may cause irreparable harm to the Disclosing Party for which monetary damages would be an inadequate remedy. Accordingly, the Disclosing Party shall be entitled to seek and obtain specific performance, temporary and permanent injunctive relief, and any other equitable remedy from any court of competent jurisdiction, in addition to all other remedies available at law or in equity, without the necessity of (i) proving actual damages or the existence of irreparable harm, (ii) posting any bond, surety, or other security, or (iii) establishing the inadequacy of monetary damages as a remedy. The Parties hereby stipulate that the Disclosing Party shall be entitled to such equitable relief upon a showing that the Receiving Party has breached or threatened to breach any provision of this Agreement. The Receiving Party hereby waives any defense that a remedy at law would be adequate and any requirement that the Disclosing Party post a bond or other security as a condition to obtaining any such relief.",
+      "standardPositionText": [
+        "The NDA may include a provision acknowledging that a breach of the confidentiality obligations set forth in the NDA could cause irreparable harm to the Disclosing Party and that equitable relief, including injunctive relief, may be an appropriate remedy in addition to all other remedies available at law or in equity.",
+        "However, Verdantis requires that the following two limitations be observed in any equitable-relief provision:",
+        "The NDA must require a court determination that irreparable harm exists before injunctive relief may issue.",
+        "The NDA must not waive the requirement to post a bond or other security as a condition to obtaining a temporary restraining order or preliminary injunction."
+      ],
+      "expectedTableRow": {
+        "term": "Equitable relief: irreparable harm and bond",
+        "risk": [
+          "High"
+        ],
+        "reason": "Relief is available without proving irreparable harm or posting a bond, entitlement is stipulated on a showing of breach, and the bond requirement is waived.",
+        "positionAsked": "A court must find irreparable harm and may require a bond; an acknowledgment of potential irreparable harm is fine."
+      },
+      "exampleRedline": "Replace Section 10(a) with: \"Section 10(a) — Injunctive Relief. Each Party acknowledges that any breach or threatened breach of this Agreement may cause irreparable harm to the Disclosing Party for which monetary damages may be an inadequate remedy. Accordingly, the Disclosing Party may seek specific performance and injunctive relief from any court of competent jurisdiction, in addition to all other remedies available at law or in equity, upon a determination by such court that irreparable harm exists and subject to the posting of any bond or other security that the court may require.\""
+    }
+  ],
+  "minor": [
+    {
+      "id": "M1",
+      "term": "Warranty disclaimer: fraud savings clause",
+      "playbookSection": "§3.5",
+      "agreementClause": "Section 5",
+      "deviation": "The Section 5 disclaimer and release of 'any and all claims' (surviving indefinitely under Section 12) have no savings clause for fraud or intentional misrepresentation, and the Section 13(a) non-reliance language makes fraud claims harder still.",
+      "expectedVerdict": "outside_fallbacks or walk_away",
+      "riskTier": "Low (Medium is also acceptable because of the broad release)",
+      "redlineShould": "Add a fraud or intentional-misrepresentation savings clause.",
+      "positionRef": [
+        "P5"
+      ],
+      "agreementClauseText": "Each Party acknowledges that neither the Disclosing Party nor any of its officers, directors, employees, agents, or other representatives makes any representation or warranty, express or implied, as to the accuracy, completeness, merchantability, fitness for a particular purpose, or suitability of any Confidential Information furnished hereunder. All Confidential Information is provided on an \"as is\" basis, and the Receiving Party assumes full responsibility for all conclusions derived from such information. Neither the Disclosing Party nor any of its officers, directors, employees, agents, or other representatives shall have any liability to the Receiving Party or any of its Permitted Disclosees relating to or resulting from the use of any Confidential Information or any errors therein or omissions therefrom, and the Receiving Party hereby releases the Disclosing Party and its officers, directors, employees, agents, and representatives from any and all claims arising from or related to such use, errors, or omissions. Only those representations and warranties, if any, that are made in a definitive agreement relating to the Transaction, when, as, and if executed, and subject to such limitations and restrictions as may be specified therein, shall have any legal effect.",
+      "agreementQuote": "releases the Disclosing Party and its officers, directors, employees, agents, and representatives from any and all claims",
+      "standardPositionText": [
+        "Verdantis accepts and, in many cases, will affirmatively propose the inclusion of a provision disclaiming warranties as to the accuracy, completeness, or fitness for a particular purpose of the Confidential Information.",
+        "However, any such disclaimer must include a savings clause expressly preserving claims for fraud or intentional misrepresentation."
+      ],
+      "expectedTableRow": {
+        "term": "Warranty disclaimer: fraud savings clause",
+        "risk": [
+          "Low",
+          "Medium"
+        ],
+        "reason": "The disclaimer and broad release have no savings clause for fraud or intentional misrepresentation.",
+        "positionAsked": "Add a savings clause preserving claims for fraud or intentional misrepresentation."
+      },
+      "exampleRedline": "Add at the end of Section 5: \"Nothing in this Section 5 or in Section 13(a) shall limit or release any claim for fraud or intentional misrepresentation.\""
+    },
+    {
+      "id": "M2",
+      "term": "Return/destruction trigger",
+      "playbookSection": "§5.1",
+      "agreementClause": "Section 7(a)",
+      "deviation": "Triggered only by written request, with no automatic trigger when discussions end.",
+      "expectedVerdict": "within_fallback",
+      "riskTier": "Low",
+      "redlineShould": "Should propose the preferred trigger (written request or end of discussions). Leaving it is a minor miss, not a failure.",
+      "positionRef": [
+        "P9"
+      ],
+      "agreementClauseText": "Section 7(a) — Obligation to Return or Destroy. Upon the written request of the Disclosing Party at any time, the Receiving Party shall promptly, and in any event within five (5) business days of the date of such written request, at the Disclosing Party's election, either (i) return to the Disclosing Party all Confidential Information (including all copies, extracts, reproductions, and summaries thereof) in the possession or control of the Receiving Party or any of its Permitted Disclosees, or (ii) destroy all such Confidential Information. Promptly following such return or destruction, and in any event within five (5) business days of the date of the Disclosing Party's written request, the Receiving Party shall provide to the Disclosing Party a written certification of such return or destruction, which certification shall be signed by an authorized officer of the Receiving Party and shall confirm that all Confidential Information, including all copies, extracts, reproductions, and summaries thereof, has been returned or destroyed in accordance with this Section 7.",
+      "agreementQuote": "Upon the written request of the Disclosing Party at any time",
+      "standardPositionText": [
+        "The obligation to return or destroy Confidential Information shall arise upon the earliest of: (a) receipt by the Receiving Party of a written request from the Disclosing Party at any time (whether during or after the term of the NDA); or (b) termination or expiration of discussions regarding the Transaction, whether such termination occurs by mutual agreement, by unilateral decision of either party, or by operation of the NDA's term."
+      ],
+      "expectedTableRow": {
+        "term": "Return/destruction trigger",
+        "risk": [
+          "Low"
+        ],
+        "reason": "Return or destruction is triggered only by written request, not also by the end of discussions.",
+        "positionAsked": "Trigger on the earlier of a written request or the end of discussions."
+      },
+      "exampleRedline": "Section 7(a): replace \"Upon the written request of the Disclosing Party at any time\" with \"Upon the earlier of (i) the written request of the Disclosing Party at any time and (ii) the termination or expiration of discussions regarding the Transaction\", and make the return/destruction and certification periods (fifteen (15) business days, see C5) run from that event."
+    },
+    {
+      "id": "M3",
+      "term": "Governing law and forum",
+      "playbookSection": "§9.1",
+      "agreementClause": "Sections 11(a) and 11(b)",
+      "deviation": "New York law and the Supreme Court of the State of New York, County of New York, instead of Delaware and the Court of Chancery.",
+      "expectedVerdict": "within_fallback",
+      "riskTier": "Low",
+      "redlineShould": "Should propose Delaware law and the Court of Chancery. Keeping New York is a minor miss, not a failure.",
+      "positionRef": [
+        "P18"
+      ],
+      "agreementClauseText": "Section 11(a) — Governing Law. This Agreement shall be governed by, and construed and enforced in accordance with, the laws of the State of New York, without regard to any conflict of laws principles thereof that would result in the application of the laws of any other jurisdiction.\n\nSection 11(b) — Exclusive Jurisdiction. Each Party hereby irrevocably and unconditionally submits to the exclusive jurisdiction of the Supreme Court of the State of New York, County of New York, and any appellate court therefrom, for the purposes of any suit, action, or other proceeding arising out of or relating to this Agreement or any transaction contemplated hereby. Each Party irrevocably and unconditionally waives any objection it may now or hereafter have to the laying of venue of any such suit, action, or proceeding in such courts and irrevocably waives and agrees not to plead or claim in any such court that any such suit, action, or proceeding brought in any such court has been brought in an inconvenient forum. Each Party agrees that a judgment in any such suit, action, or proceeding may be enforced in any other jurisdiction by suit on the judgment or in any other manner provided by applicable law.",
+      "agreementQuote": "the laws of the State of New York",
+      "standardPositionText": [
+        "The NDA shall be governed by and construed in accordance with the laws of the State of Delaware, without regard to its conflicts-of-laws principles that would result in the application of the laws of any other jurisdiction.",
+        "Each party shall submit to the exclusive jurisdiction and venue of the Court of Chancery of the State of Delaware for any action, suit, or proceeding arising out of or relating to the NDA.",
+        "If the Court of Chancery declines to exercise jurisdiction over a particular matter, the parties shall submit to the exclusive jurisdiction of the United States District Court for the District of Delaware."
+      ],
+      "expectedTableRow": {
+        "term": "Governing law and forum",
+        "risk": [
+          "Low"
+        ],
+        "reason": "New York law and New York courts instead of Delaware law and the Court of Chancery.",
+        "positionAsked": "Delaware law and the Delaware Court of Chancery."
+      },
+      "exampleRedline": "Section 11(a): replace \"the State of New York\" with \"the State of Delaware\". Section 11(b): replace \"the Supreme Court of the State of New York, County of New York, and any appellate court therefrom\" with \"the Court of Chancery of the State of Delaware (or, if that court declines jurisdiction, the United States District Court for the District of Delaware), and any appellate court therefrom\"."
+    },
+    {
+      "id": "M4",
+      "term": "Jury trial waiver",
+      "playbookSection": "§9.2",
+      "agreementClause": "Not in the agreement",
+      "deviation": "No mutual jury-trial waiver.",
+      "expectedVerdict": "within_fallback",
+      "riskTier": "Low",
+      "redlineShould": "Should propose a mutual jury-trial waiver. Leaving it out is a minor miss, not a failure.",
+      "positionRef": [
+        "P19"
+      ],
+      "agreementClauseText": "",
+      "agreementQuote": "",
+      "standardPositionText": [
+        "The NDA should include a mutual waiver of the right to a trial by jury for any action, suit, or proceeding arising out of or relating to the NDA."
+      ],
+      "expectedTableRow": {
+        "term": "Jury trial waiver",
+        "risk": [
+          "Low"
+        ],
+        "reason": "The agreement has no mutual jury-trial waiver.",
+        "positionAsked": "Add a mutual jury-trial waiver."
+      },
+      "exampleRedline": "Insert new Section 11(d) — Waiver of Jury Trial: \"EACH PARTY HEREBY IRREVOCABLY WAIVES ANY RIGHT TO A TRIAL BY JURY IN ANY SUIT, ACTION OR PROCEEDING ARISING OUT OF OR RELATING TO THIS AGREEMENT.\""
+    },
+    {
+      "id": "M5",
+      "term": "Exclusions: added burdens on third-party receipt",
+      "playbookSection": "§3.1 negotiation note",
+      "agreementClause": "Section 1(b)(iii) and the paragraph after 1(b)",
+      "deviation": "The third-party exclusion adds 'after reasonable inquiry' to the knowledge qualifier, and the exclusions are to be narrowly construed with the burden on the Receiving Party.",
+      "expectedVerdict": "outside_fallbacks",
+      "riskTier": "Low or Medium (the playbook gives no tier)",
+      "redlineShould": "Remove 'after reasonable inquiry' and the narrow-construction language.",
+      "positionRef": [
+        "P1"
+      ],
+      "agreementClauseText": "Section 1(b) — Exclusions from Confidential Information. Notwithstanding the foregoing, \"Confidential Information\" shall not include any information that: (i) is or becomes generally available to the public other than as a result of disclosure by the Receiving Party or any of its Permitted Disclosees in violation of this Agreement; (ii) was already in the possession of the Receiving Party prior to its disclosure by or on behalf of the Disclosing Party, as evidenced by the Receiving Party's contemporaneous written records existing prior to the date of such disclosure; (iii) is received by the Receiving Party from a third party that is not, to the Receiving Party's knowledge after reasonable inquiry, bound by any obligation of confidentiality to the Disclosing Party with respect to such information; or (iv) is required to be disclosed by applicable law, regulation, or legal process, provided that the Receiving Party complies with the requirements of Section 3 of this Agreement. The burden of establishing the applicability of any of the foregoing exclusions shall rest with the Receiving Party, and any such exclusion shall be narrowly construed. In the case of clause (i) above, specific items of Confidential Information shall not be deemed to be within the public domain merely because the information is embraced by more general information in the public domain, and any combination of features shall not be deemed to be in the public domain merely because individual features are in the public domain unless the combination itself and its principle of operation are in the public domain.",
+      "agreementQuote": "knowledge after reasonable inquiry",
+      "standardPositionText": [
+        "Information received by the Receiving Party from a third party that is not, to the Receiving Party's knowledge, subject to a confidentiality obligation to the Disclosing Party with respect to such information."
+      ],
+      "expectedTableRow": {
+        "term": "Exclusions: added burdens",
+        "risk": [
+          "Low",
+          "Medium"
+        ],
+        "reason": "The third-party exclusion adds an \"after reasonable inquiry\" standard and the exclusions are to be narrowly construed.",
+        "positionAsked": "A plain knowledge qualifier and no narrow-construction language."
+      },
+      "exampleRedline": "Section 1(b)(iii): delete \"after reasonable inquiry\". In the paragraph after clause (iv), delete \", and any such exclusion shall be narrowly construed\"."
+    },
+    {
+      "id": "M6",
+      "term": "Term of the agreement",
+      "playbookSection": "§4.2",
+      "agreementClause": "Not in the agreement (Section 6 only lets a party end discussions)",
+      "deviation": "No defined term and no right to terminate the agreement itself: an evergreen agreement.",
+      "expectedVerdict": "walk_away",
+      "riskTier": "Medium",
+      "redlineShould": "Add a 12-month term and a mutual right to terminate on written notice, with confidentiality surviving per §4.1.",
+      "positionRef": [
+        "P7"
+      ],
+      "agreementClauseText": "",
+      "agreementQuote": "",
+      "standardPositionText": [
+        "The NDA shall have a defined term of 12 months from the date of execution, during which period the parties may exchange Confidential Information in connection with evaluating and, if applicable, consummating the Transaction.",
+        "The NDA may also include a provision permitting either party to terminate the NDA at any time upon written notice to the other party.",
+        "In either case — whether the NDA expires at the end of its stated term or is terminated earlier — the confidentiality obligations set forth in the NDA shall survive termination or expiration in accordance with the survival period specified in Section 4.1."
+      ],
+      "expectedTableRow": {
+        "term": "Term of the agreement",
+        "risk": [
+          "Medium"
+        ],
+        "reason": "The agreement has no defined term and no right to terminate it, so it runs indefinitely.",
+        "positionAsked": "A 12-month term with a mutual right to terminate on written notice, confidentiality surviving for the survival period."
+      },
+      "exampleRedline": "Insert at the start of Section 12: \"This Agreement shall have a term of twelve (12) months from the Effective Date, and either Party may terminate this Agreement at any time upon written notice to the other Party. The confidentiality obligations of this Agreement shall survive any expiration or termination of this Agreement for the Confidentiality Period.\""
+    },
+    {
+      "id": "M7",
+      "term": "Assignment to affiliates",
+      "playbookSection": "§10.1",
+      "agreementClause": "Section 13(c)",
+      "deviation": "Either party may assign to an affiliate without consent, broader than the successor-only carve-out.",
+      "expectedVerdict": "outside_fallbacks",
+      "riskTier": "Low or Medium (the playbook gives no tier)",
+      "redlineShould": "Remove the affiliate carve-out, keeping only the successor carve-out.",
+      "positionRef": [
+        "P20"
+      ],
+      "agreementClauseText": "Section 13(c) — Assignment. Neither Party may assign, delegate, or otherwise transfer this Agreement or any of its rights, interests, or obligations hereunder without the prior written consent of the other Party, which consent may be withheld in such other Party's sole discretion, except that either Party may, without the consent of the other Party, assign this Agreement to (i) an affiliate of such Party, provided that such affiliate agrees in writing to be bound by all of the terms and conditions of this Agreement, or (ii) a successor in interest in connection with a merger, consolidation, reorganization, or sale of all or substantially all of such Party's assets, provided that such successor agrees in writing to be bound by all of the terms and conditions of this Agreement. Any purported assignment in contravention of this Section 13(c) shall be null and void and of no force or effect.",
+      "agreementQuote": "assign this Agreement to (i) an affiliate of such Party",
+      "standardPositionText": [
+        "The NDA shall provide that neither party may assign the NDA or any of its rights or obligations hereunder without the prior written consent of the other party, which consent may be withheld in the non-assigning party's sole discretion, except that either party may assign the NDA, without the consent of the other party, to a successor entity in connection with a merger, consolidation, reorganization, or sale of all or substantially all of the assigning party's assets to which the NDA relates."
+      ],
+      "expectedTableRow": {
+        "term": "Assignment to affiliates",
+        "risk": [
+          "Low",
+          "Medium"
+        ],
+        "reason": "Either party may assign to an affiliate without consent, beyond the successor-only exception.",
+        "positionAsked": "Consent for any assignment except to a successor in a merger or sale of substantially all assets."
+      },
+      "exampleRedline": "Section 13(c): delete \"(i) an affiliate of such Party, provided that such affiliate agrees in writing to be bound by all of the terms and conditions of this Agreement, or (ii)\", so the exception reads \"assign this Agreement to a successor in interest in connection with a merger, consolidation, reorganization, or sale of all or substantially all of such Party's assets\"."
+    },
+    {
+      "id": "M8",
+      "term": "Use limitation scope",
+      "playbookSection": "§6.2",
+      "agreementClause": "Section 2(c)",
+      "deviation": "Use is limited to evaluating the Transaction, not also negotiating and consummating it.",
+      "expectedVerdict": "outside_fallbacks",
+      "riskTier": "Low or Medium (the playbook gives no tier)",
+      "redlineShould": "Add 'and, if applicable, negotiating and consummating' the Transaction.",
+      "positionRef": [
+        "P13"
+      ],
+      "agreementClauseText": "Section 2(c) — Use Restriction. The Receiving Party shall use the Confidential Information solely for the purpose of evaluating the Transaction and for no other purpose whatsoever. Without limiting the generality of the foregoing, the Receiving Party shall not use the Confidential Information for competitive purposes, for the benefit of any third party, or in connection with any business activity other than the evaluation of the Transaction.",
+      "agreementQuote": "solely for the purpose of evaluating the Transaction and for no other purpose whatsoever",
+      "standardPositionText": [
+        "The NDA shall provide that Confidential Information received by the Receiving Party may be used solely for the purpose of evaluating and, if applicable, negotiating and consummating the Transaction.",
+        "No other use of the Confidential Information is permitted, including without limitation use for competitive purposes, product development unrelated to the Transaction, or any commercial exploitation of the Confidential Information."
+      ],
+      "expectedTableRow": {
+        "term": "Use limitation scope",
+        "risk": [
+          "Low",
+          "Medium"
+        ],
+        "reason": "Use is limited to evaluating the Transaction, not also negotiating and consummating it.",
+        "positionAsked": "Use for evaluating and, if applicable, negotiating and consummating the Transaction."
+      },
+      "exampleRedline": "Section 2(c): replace \"solely for the purpose of evaluating the Transaction\" with \"solely for the purpose of evaluating and, if applicable, negotiating and consummating the Transaction\", and replace \"other than the evaluation of the Transaction\" with \"other than the evaluation, negotiation and consummation of the Transaction\"."
+    }
+  ],
+  "optional": [
+    "§10.4 Notices: Section 13(f) deems notice given one business day after courier deposit or three days after mailing, not on receipt (Low). Flagging it or not is acceptable.",
+    "§3.1 Compelled disclosure: Section 3 requires notice with no 'to the extent legally permissible' qualifier. Flagging it or not is acceptable.",
+    "§3.2 fallback: Section 1(c)(C) requires Permitted Disclosees to agree to be bound as if a party, and the Receiving Party to keep a list. Flagging it as part of C2 or separately is acceptable.",
+    "§5.2: Section 7(a) gives the election to return or destroy to the Disclosing Party, not the Receiving Party. Flagging it as part of C5 or separately is acceptable."
+  ],
+  "compliant": [
+    "§3.3 Scope and form: Section 1(a) covers written, oral, electronic and visual information.",
+    "§3.4 Mutual: the agreement is mutual.",
+    "§3.1 Compelled disclosure exclusion: Section 1(b)(iv) is present, with notice and cooperation at the Disclosing Party's cost in Section 3.",
+    "§5.3 Certification: Section 7(a) requires certification by an authorized officer.",
+    "§6.2 Use limitation: Section 2(c) bars competitive and other uses (its narrower scope is M8).",
+    "§8.1 General remedies: Section 10(b) makes remedies cumulative, with no cap or damages exclusion.",
+    "§10.2 Amendment and waiver: Section 13(b) requires signed writings.",
+    "§10.4 Notices address: Section 13(f) sends notices to Verdantis at 900 Ridgeview Boulevard, Attention: General Counsel.",
+    "§10.3 Entire agreement: Section 13(a) is a standard entire-agreement clause (its non-reliance sentence bears on M1)."
+  ],
+  "documentExpectations": {
+    "deviationTable": {
+      "columns": [
+        "term",
+        "risk",
+        "reason",
+        "positionAsked"
+      ],
+      "rule": "One row per deviation with its term, risk, reason and the position Verdantis asks for, each in a few words. Every critical item (C1–C9) must have a row; a row may cover a critical item together with a related optional point (for example C2 with the Section 1(c)(C) requirement). Compare each row with the item's expectedTableRow: the risk must be in its accept-list, and the reason and positionAsked must convey the same gist, not the same words."
+    },
+    "redline": {
+      "rule": "Changes are given per clause: each names the section and gives the exact new wording (or the deletion), fitted to the agreement's defined terms and numbering, without copying the current clause text back unchanged.",
+      "firstRedline": "This is a first redline, so every change must propose the preferred position (Appendix B: the fallback only after the counterparty has rejected the preferred position). A fallback in place of the preferred position fails the item's redlineMust where it says so (C3, C5, C6, C8).",
+      "format": "The agreement is a PDF, so the redline may be a schedule of changes listing each clause and its new wording rather than a marked-up copy.",
+      "examples": "Each item's exampleRedline is one acceptable wording, not required wording. Judge each change against redlineMust (critical) or redlineShould (minor)."
+    },
+    "comments": "Comments in the redline are optional. A comment must not contradict the redline or the table, must not cite clause text that is not in the agreement, and must not reveal the playbook (Appendix B: do not reference the playbook to the counterparty)."
+  }
+}

@@ -74,6 +74,17 @@ def test_card():
     assert "no creds" in json.dumps(blocked)
 
 
+def test_paste_embeds_text_as_js_string():
+    with tempfile.TemporaryDirectory() as tmp:
+        source, out = os.path.join(tmp, "p.md"), os.path.join(tmp, "p.js")
+        with open(source, "w", encoding="utf-8") as handle:
+            handle.write('Line "one"\n• Two &amp; three')
+        subprocess.run([sys.executable, os.path.join(HERE, "paste.py"), source, out], check=True, capture_output=True)
+        code = open(out, encoding="utf-8").read()
+        assert code.startswith("async (page) =>") and ".ProseMirror" in code
+        assert json.dumps('Line "one"\n• Two &amp; three') in code
+
+
 if __name__ == "__main__":
     for name, test in list(globals().items()):
         if name.startswith("test_"):
