@@ -29,4 +29,4 @@ Check each prerequisite by finding its name in the UI. When one is missing, SETU
 
 1. An AI Agent named `Ask Kes Anything`, in the AI Agent section.
 2. A playbook titled exactly `NDA Playbook` on its `Playbooks` page.
-3. The files `verdantis-nda-playbook.md`, `verdantis-expected-positions.json`, `calyx-draft-nda.pdf` and `calyx-answer-key.json` in `${CLAUDE_SKILL_DIR}/test-cases/playbook/files/`: check them with `ls`.
+3. The files `verdantis-nda-playbook.md`, `verdantis-expected-positions.json`, `calyx-draft-nda.docx`, `calyx-draft-nda.pdf` and `calyx-answer-key.json` in `${CLAUDE_SKILL_DIR}/test-cases/playbook/files/`: check them with `ls`.

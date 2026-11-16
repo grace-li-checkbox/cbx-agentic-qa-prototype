@@ -15,19 +15,19 @@ After each reply, read the `/conversation/stream` response with `playwright-cli 
 
 ## S1 Review the NDA
 
-Open the AI Agent `Ask Kes Anything` and start a chat. Click the chat box's attach control, run `playwright-cli upload FILES/calyx-draft-nda.pdf`, wait until the chat box shows `calyx-draft-nda`, then send the S1 message. Wait for the reply.
+Open the AI Agent `Ask Kes Anything` and start a chat. Click the chat box's attach control, run `playwright-cli upload FILES/calyx-draft-nda.docx`, wait until the chat box shows `calyx-draft-nda`, then send the S1 message. Wait for the reply.
 
 Pass:
 - the tools include `load_playbook` and `review_playbook`;
 - a `load_playbook` `search` is 1 to 3 words and names an NDA (`nda` or `non-disclosure`);
-- a `review_playbook` has `agreement_file_name` `calyx-draft-nda.pdf` and a `playbook_id` of the playbook titled `NDA Playbook` (find its id in the `/playbooks` list response the page loaded, or open `NDA Playbook` from the `Playbooks` page in this tab and read it from the URL, then come back).
+- a `review_playbook` has `agreement_file_name` `calyx-draft-nda.docx` and a `playbook_id` of the playbook titled `NDA Playbook` (find its id in the `/playbooks` list response the page loaded, or open `NDA Playbook` from the `Playbooks` page in this tab and read it from the URL, then come back).
 
 Screenshot `review-reply`.
 
 ## S2 Check the document generation call
 
 Never fails. Each miss is a P1 warning, part `tool call` with item `Documents`:
-`document_generation` not called; empty `instructions`; `reference_file_name` neither `calyx-draft-nda.pdf` nor null; a `documents[].file_name` not ending in `.docx`; no document whose name or description says `deviation`; none that says `redline`.
+`document_generation` not called; empty `instructions`; `reference_file_name` neither `calyx-draft-nda.docx` nor null; a `documents[].file_name` not ending in `.docx`; no document whose name or description says `deviation`; none that says `redline`.
 
 ## S3 Record the review on a matter
 
